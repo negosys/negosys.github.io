@@ -8,8 +8,6 @@ function loginPost() {
     var username = document.getElementById('emailAdd').value;
     var password = document.getElementById('password').value;
 
-    username = 'yuie@evonit.net';
-    password = 'asdf!@34';
     //console.log(username);
 
     if (username == '') {

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEGOSYS | Dashboard</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="dist/css/adminlte.css">
+  <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+  <style>
+    .bg-image-vertical {
+      position: relative;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: auto 100%;
+    }
+
+    @media (min-width: 1025px) {
+      .h-custom-2 {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="vh-100">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-sm-6 text-black">
+          <div class="align-items-center px-5 ms-xl-4 pt-5 pt-xl-5 mr-4 ml-4">
+
+            <form method="post" id="formResgiter">
+              <h3 class="mb-3 pb-3" style="letter-spacing: 1px;"><strong>Hi &#128075; WELCOME!</strong></h3>
+
+              <h3 class="mb-3 pb-3" style="letter-spacing: 1px; color:#4c58d4;"><strong>Let's Get Started</strong></h3>
+
+              <div class="form-group">
+                <label class="form-label" for="fullName">Full Name</label>
+                <input type="text" id="fullname" class="form-control" placeholder="Enter your full name" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="emailAdd">Email</label>
+                <input type="email" id="emailAdd" class="form-control" placeholder="Enter your email address" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="companyName">Company Name</label>
+                <input type="text" id="companyName" class="form-control" placeholder="Enter your company name" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="hpNo">Phone Number</label>
+                <input type="text" id="hpNo" class="form-control" placeholder="Enter your phone number" />
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- textarea -->
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Enter your password">
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-1 mb-4">
+                <button id="btnRegister" type="button" class="btn btn-info btn-lg btn-block themeColor" type="button">Rgister Now</button>
+                <p class="text-center"><a href="login.html" class="link-info">Already have account? Sign in</a></p>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="dist/img/register.png" alt="Login image" class="w-100 vh-100"
+            style="object-fit: cover; object-position: left;">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="dist/js/login.js"></script>
+
+</body>
+
+</html>

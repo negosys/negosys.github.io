@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEGOSYS | Issues</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.css">
+  <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+  <script src="../dist/js/footer.js" type="text/javascript" defer></script>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="../index.html" class="brand-link">
+        <img src="../dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3">
+        <span class="brand-text font-weight-light">NEGOSYS</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+            <li class="nav-item">
+              <a href="projects.html" class="nav-link">
+                <!--i class="fas fa-lg fa-plus-square mr-2"></i-->
+                <img src="../dist/img/plus.png" alt="icon" class="iconImg brand-image img-square elevation-3">
+                <p class="text text-white">
+                  Create Project
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <!--i class="fas fa-lg fa-sync mr-2"></i-->
+                <img src="../dist/img/refresh.png" alt="icon" class="iconImg brand-image">
+                <p class="text text-white">On-going</p>
+              </a>
+            </li>
+          </ul>
+
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+     
+      <div class="sidebar-custom">
+        <a href="#" class="nav-link">
+          <img src="../dist/img/user.png" alt="icon" class="iconImg brand-image">
+                <span class="pl-3 text-white">Username</span>
+        </a>
+        <a href="../login.html" class="nav-link">
+          <img src="../dist/img/power.png" alt="icon" class="iconImg brand-image">
+          <span class="pl-3 text-white">Logout</span>
+        </a>    
+      </div>
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2 mt-2">
+            <div class="col-sm-6">
+              <h1>Tell us about your issues</h1>
+            </div>
+            <div class="col-sm-6">
+              <div class="float-sm-right">
+                <a type="button" href="projects.html" class="btn btn-info themeColor"><i
+                    class="fa fa-arrow-left"></i> Back</a>
+                <a id="btnNext" type="button" href="#" class="btn btn-primary themeColor">Next <i
+                    class="fa fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6 col-sm-4">
+                <div class="form-group">
+                  <label>Select Issue Kind:</label>
+                  <select id="ddlIssueKind" class="form-control select2" data-dropdown-css-class="select2-purple"
+                    style="width: 100%;">
+                  </select>
+
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-6 col-sm-4">
+                <div class="form-group">
+                  <label>Select Issue</label>
+                  <div class="select2-purple">
+                    <select id="ddlIssue" class="form-control select2" data-dropdown-css-class="select2-purple"
+                      style="width: 100%;">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-sm-4 mt-4">
+                <button id="btnAddIssue" type="button" class="btn btn-info themeColor"><i class="fa fa-plus"></i>
+                  Add
+                  Issue</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <table id="tblData" class="table table-hover" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Issue Kind</th>
+                        <th>Issue</th>
+                        <th class="text-center">Delete</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+
+
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer-component></footer-component>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../plugins/select2/js/select2.full.min.js"></script>
+  <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+
+
+  <!-- DataTables  & Plugins -->
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+
+
+  <script src="../dist/js/issues.js"></script>
+
+  <!-- Page specific script -->
+  <script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    })
+
+
+  </script>
+</body>
+
+</html>

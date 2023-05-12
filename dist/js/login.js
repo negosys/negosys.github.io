@@ -8,6 +8,8 @@ function loginPost() {
     var username = document.getElementById('emailAdd').value;
     var password = document.getElementById('password').value;
 
+	username = 'yuie@evonit.net';
+    password = 'asdf!@34';
     //console.log(username);
 
     if (username == '') {
@@ -38,7 +40,7 @@ function loginPost() {
             console.log(x);
             let y = document.cookie;
             console.log(y);
-            //location.href = "pages/projects.html";
+            location.href = "pages/projects.html";
         },
         error: function (error) {
             console.log(JSON.stringify(error));

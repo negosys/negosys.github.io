@@ -114,6 +114,10 @@ $('#ddlIssueKind').on('select2:select', function (e) {
     $.ajax({
         url: 'https://api.negosys.co.kr/nego/issueKind',
         type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (data) {
             var issue = $("#ddlIssue");
             issue.empty();

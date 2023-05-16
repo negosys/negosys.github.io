@@ -66,9 +66,13 @@ function registerPost() {
         userCompany: compName
     }
 
+    console.log(reqObj);
+
+    //return;
+
     $.ajax({
         url:
-            'https://api.negosys.co.kr/register',
+            'https://api.negosys.co.kr/registerUser',
         type: "POST",
         xhrFields: {
             withCredentials: true

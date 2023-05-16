@@ -1,5 +1,6 @@
 
 var projectNo = "";
+var curIssuesNo = "";
 
 $(document).ready(function () {
     loadIssueKind();
@@ -9,18 +10,27 @@ $(document).ready(function () {
     projectNo = urlParams.get('projectSn');
 
     loadProjectIssueList();
+    getIssueCount();
 });
 
 document
     .getElementById("btnAddIssue")
     .addEventListener("click", addIssue);
 
-    document
+document
     .getElementById("btnNext")
     .addEventListener("click", nextPage);
 
-    
-function nextPage(){
+
+function nextPage() {
+    if (getIssueCount < 5) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'Minimum 5 Issues.'
+        });
+        return;
+    }
+
     location.href = "prior-issues.html?projectSn=" + projectNo;
 }
 
@@ -91,7 +101,12 @@ function loadProjectIssueList() {
             }
         ]
     });
+    //console.log(dataTable.data().count());
+}
 
+function getIssueCount() {
+    var table = $("#tblData").DataTable();
+    return table.data().count();
 }
 
 $('#ddlIssueKind').on('select2:select', function (e) {
@@ -107,7 +122,7 @@ $('#ddlIssueKind').on('select2:select', function (e) {
                 text: "-Select an issue"
             }));
             $.each(data, function (index, itemData) {
-                if (itemData.issueKind == selectedIssueKind) {               
+                if (itemData.issueKind == selectedIssueKind) {
                     $.each(itemData.issueList, function (i, issueData) {
                         console.log(issueData);
                         issue.append($('<option/>', {
@@ -129,9 +144,17 @@ $('#ddlIssueKind').on('select2:select', function (e) {
 });
 
 function addIssue() {
+    if (getIssueCount == 10) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'Issues cannot more than 10.'
+        });
+        return;
+    }
+
     var issueKind = document.getElementById("ddlIssueKind").options[document.getElementById("ddlIssueKind").selectedIndex].value;
     var issue = document.getElementById("ddlIssue").options[document.getElementById("ddlIssue").selectedIndex].value;
-    
+
     if ($("#ddlIssueKind").val() == "") {
         Swal.fire({
             icon: 'warning',
@@ -174,7 +197,7 @@ function addIssue() {
 }
 
 function deleteIssue(issueSn) {
-    
+
     if (issueSn == '') {
         Swal.fire({
             icon: 'warning',

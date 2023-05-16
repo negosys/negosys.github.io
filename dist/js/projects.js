@@ -45,7 +45,7 @@ function loadProjectList() {
                                 <a href="issues.html?projectSn=${data}" class="btn btn-default" style="cursor:pointer">
                                     Update 
                                 </a>
-                                <a href="issues.html?projectSn=${data}" class="btn btn-default" style="cursor:pointer">
+                                <a href="issue-tracking.html?projectSn=${data}" class="btn btn-default" style="cursor:pointer">
                                     Issue Tracking 
                                 </a>
                                 <a onclick=Delete("/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">

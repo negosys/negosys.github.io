@@ -55675,9 +55675,32 @@ a.text-muted:hover {
   width: 30px;
 }
 
+.iconThemeColor {
+  color: #5D66DF;
+}
+
+.iconDisableThemeColor {
+  color: #5D66DF;
+  opacity: 0.2;
+}
+
 .themeColor {
   background-color: #5D66DF;
   color: white;
+}
+
+.themeColorOutline {
+  border-color: #5D66DF;
+  color: #5D66DF;
+}
+
+.themeColor1 {
+  background-color: #E7E8FF;
+  color: black;
+}
+
+.card-outlineTheme {
+  border-top: 3px solid #5D66DF;
 }
 
 th {
@@ -55689,6 +55712,12 @@ th {
   color: #5D66DF;
   background-color: #ffffff;
   box-shadow: none;
+}
+
+.no-border {
+  border: 0;
+  box-shadow: none;
+  /* You may want to include this as bootstrap applies these styles too */
 }
 
 

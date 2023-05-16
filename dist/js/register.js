@@ -58,10 +58,24 @@ function registerPost() {
         return;
     }
 
+    let reqObj = {
+        userEmail: userEmail,
+        userNm: fullName,
+        userPw: password,
+        userPhone: hpNo,
+        userCompany: compName
+    }
+
     $.ajax({
         url:
             'https://api.negosys.co.kr/register',
         type: "POST",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        data: JSON.stringify(reqObj),
+        contentType: "application/json",
         data: { userEmail: userEmail, userNm: fullName, userPw: password, userPhone: hpNo, userCompany: compName },
         success: function (data) {
             var x = JSON.stringify(data);

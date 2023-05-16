@@ -61,6 +61,10 @@ document
     .getElementById("btnSave")
     .addEventListener("click", saveIssue);
 
+    document
+    .getElementById("btnBack")
+    .addEventListener("click", prevPage);
+
 document
     .getElementById("btnNext")
     .addEventListener("click", nextPage);
@@ -70,6 +74,10 @@ function nextPage() {
         location.href = "swot-analysis.html?projectSn=" + projectNo;
     }
     location.href = "swot-analysis.html?projectSn=" + projectNo;
+}
+
+function prevPage() {
+    location.href = "issues.html?projectSn=" + projectNo;
 }
 
 function saveIssue() {

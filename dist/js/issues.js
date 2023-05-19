@@ -23,7 +23,7 @@ document
 
 
 function nextPage() {
-    if (getIssueCount < 5) {
+    if (getIssueCount() < 5) {
         Swal.fire({
             icon: 'warning',
             text: 'Minimum 5 Issues.'
@@ -69,9 +69,9 @@ function loadIssueKind() {
 
 function loadProjectIssueList() {
     dataTable = $('#tblData').DataTable({
-        paging: true,
+        paging: false,
         destroy: true,
-        pageLength: 10,
+        //pageLength: 10,
         scrollX: true,
         scrollY: true,
         //order: [[10, 'asc']],
@@ -128,7 +128,7 @@ $('#ddlIssueKind').on('select2:select', function (e) {
             $.each(data, function (index, itemData) {
                 if (itemData.issueKind == selectedIssueKind) {
                     $.each(itemData.issueList, function (i, issueData) {
-                        console.log(issueData);
+                        //console.log(issueData);
                         issue.append($('<option/>', {
                             value: issueData,
                             text: issueData
@@ -148,7 +148,7 @@ $('#ddlIssueKind').on('select2:select', function (e) {
 });
 
 function addIssue() {
-    if (getIssueCount == 10) {
+    if (getIssueCount() == 10) {
         Swal.fire({
             icon: 'warning',
             text: 'Issues cannot more than 10.'
@@ -156,16 +156,21 @@ function addIssue() {
         return;
     }
 
-    var issueKind = document.getElementById("ddlIssueKind").options[document.getElementById("ddlIssueKind").selectedIndex].value;
-    var issue = document.getElementById("ddlIssue").options[document.getElementById("ddlIssue").selectedIndex].value;
+    //var issueKind = document.getElementById("ddlIssueKind").options[document.getElementById("ddlIssueKind").selectedIndex].value;
+    //var issue = document.getElementById("ddlIssue").options[document.getElementById("ddlIssue").selectedIndex].value;
 
-    if ($("#ddlIssueKind").val() == "") {
+    var issueKind = $("#ddlIssueKind").val();
+    var issue = $("#ddlIssue").val();
+
+    console.log($("#ddlIssue option:selected").index());
+
+    if (issueKind == "" || issueKind == "0") {
         Swal.fire({
             icon: 'warning',
             text: 'No Issue Kind is selected'
         });
         return;
-    } else if ($("#ddlIssue").val() == "") {
+    } else if (issue == "" || issue == "0") {
         Swal.fire({
             icon: 'warning',
             text: 'No Issue is selected'
@@ -174,6 +179,8 @@ function addIssue() {
     }
 
     let reqObj = { projectSn: projectNo, issueKind: issueKind, issue: issue }
+
+    $("#loadingView").show();
 
     $.ajax({
         url:
@@ -189,6 +196,7 @@ function addIssue() {
             var x = JSON.stringify(data);
             console.log(x);
             loadProjectIssueList();
+            $("#loadingView").hide();
         },
         error: function (error) {
             console.log(JSON.stringify(error));
@@ -196,6 +204,7 @@ function addIssue() {
                 icon: 'error',
                 text: 'Failed to add issue'
             });
+            $("#loadingView").hide();
         }
     });
 }

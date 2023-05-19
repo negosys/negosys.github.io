@@ -122,7 +122,9 @@ function saveIssue(btnId) {
         issues: updateIssueList
     }
 
-    //console.log(reqObj);
+    console.log(reqObj);
+
+    //return;
 
     $.ajax({
         url:
@@ -179,7 +181,7 @@ function loadProjectIssueList() {
                 return a.meOrder - b.meOrder;
             });
 
-            //console.log(data);
+            console.log(data);
 
             //for me side sort
             $.each(data, function (index, itemData) {
@@ -201,7 +203,7 @@ function loadProjectIssueList() {
                 html += `<p class="ml-2 meIssue-${itemData.issueSn}">${itemData.issueKind} > ${itemData.issue}</p>
                 </div><div class="col-2">
                 <input id="meId${index + 1}" type="number" min="1" max="${totalIssues}" class="form-control allow_numeric mePrior-${itemData.issueSn}" value="${meOrder}" onchange="checkMaxValue(this)"></div></div>
-                <textarea class="form-control meReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256"></textarea></div></div></div></div>`;
+                <textarea class="form-control meReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.meReason}</textarea></div></div></div></div>`;
 
             });
 
@@ -225,7 +227,7 @@ function loadProjectIssueList() {
                 otherhtml += `<p class="ml-2 otherIssue-${itemData.issueSn}">${itemData.issueKind} > ${itemData.issue}</p>
                 </div><div class="col-2">
                 <input id="otherId${index + 1}" type="number" min="1" max="${totalIssues}" class="form-control allow_numeric otherPrior-${itemData.issueSn}" value="${otherOrder}" onchange="checkMaxValue(this)"></div></div>
-                <textarea class="form-control otherReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256"></textarea></div></div></div></div>`;
+                <textarea class="form-control otherReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.otherReason}</textarea></div></div></div></div>`;
 
             });
 

@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEGOSYS | SWOT Analysis</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.css">
+  <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="../dist/css/loading.css">
+
+
+  <style>
+
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <!-- Main Sidebar Container -->
+    <div class="mainsidebar"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2 mt-2">
+            <div class="col-sm-6">
+              <h1>SWOT Analysis</h1>
+            </div>
+            <div class="col-sm-6">
+              <div class="float-sm-right">
+                <a id="btnSave" type="button" class="btn themeColorOutline"><i class="fa fa-save"></i>
+                  Save</a>
+                <a id="btnBack" type="button" class="btn themeColor"><i
+                    class="fa fa-arrow-left"></i>
+                  Back</a>
+                <a id="btnNext" type="button" class="btn themeColor">Next <i
+                    class="fa fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="issueTitle"></div>
+            </div>
+            <div class="col-md-8">
+              <div class="float-sm-right">
+                <ul class="nav nav-tabs ml-auto p-2">
+                  <li class="nav-item"><a id="btnPrevIssue" class="nav-link disabled iconDisableThemeColor" href="#"><i
+                        class="fas fa-chevron-left iconThemeColor"></i></a></li>
+                  <div class="totalIssue"></div>
+                  <li class="nav-item"><a id="btnNextIssue" class="nav-link" href="#"><i
+                        class="fas fa-chevron-right iconThemeColor"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!----------------- FOR MY SIDE ----------------->
+          <div class="card ml-1 mt-4 mb-4">
+            <div class="card-header themeColor">
+              <p class="card-title">FOR MY SIDE</p>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="collapse" href="#collapseMySide" role="button"
+                  aria-expanded="true" aria-controls="collapseMySide" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="collapse show" id="collapseMySide">
+              <div class="card-body">
+                <div class="row mb-2">
+                  <!-- left column -->
+                  <div class="col-md-6 card card-outlineTheme">
+
+                    <!-- #1 Strength -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <div class="form-group">
+                          <label>Strength</label>
+                          <input id="meSwotS1" type="text" class="form-control" placeholder="Enter Strength" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="meSwotS1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="meSwotS1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Strength -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <div class="form-group">
+                          <input id="meSwotS2" type="text" class="form-control" placeholder="Enter Strength #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotS2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotS2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Strength -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <div class="form-group">
+                          <input id="meSwotS3" type="text" class="form-control" placeholder="Enter Strength #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotS3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotS3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- right column -->
+                  <div class="col-md-6  card card-outlineTheme">
+
+                    <!-- #1 Opportunities -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Opportunities</label>
+                          <input id="meSwotO1" type="text" class="form-control" placeholder="Enter Opportunity" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="meSwotO1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="meSwotO1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Opportunities -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="meSwotO2" type="text" class="form-control" placeholder="Enter Opportunity #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotO2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotO2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Opportunities -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="meSwotO3" type="text" class="form-control" placeholder="Enter Opportunity #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotO3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotO3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- row-->
+
+                <div class="row">
+                  <!-- left column -->
+                  <div class="col-md-6 card card-outlineTheme">
+
+                    <!-- #1 Weakness -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Weakness</label>
+                          <input id="meSwotW1" type="text" class="form-control" placeholder="Enter Weakness" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="meSwotW1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="meSwotW1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Weakness -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="meSwotW2" type="text" class="form-control" placeholder="Enter Weakness #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotW2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotW2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Weakness -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="meSwotW3" type="text" class="form-control" placeholder="Enter Weakness #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotW3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotW3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- right column -->
+                  <div class="col-md-6 card card-outlineTheme">
+
+                    <!-- #1 Threat -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Threat</label>
+                          <input id="meSwotT1" type="text" class="form-control" placeholder="Enter Threat" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="meSwotT1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="meSwotT1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Threat -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="meSwotT2" type="text" class="form-control" placeholder="Enter Threat #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotT2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotT2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Threat -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="meSwotT3" type="text" class="form-control" placeholder="Enter Threat #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotT3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="meSwotT3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /.FOR MY SIDE -->
+
+
+          <!----------------- FOR OTHER SIDE ----------------->
+          <div class="card ml-1 mt-4 mb-4">
+            <div class="card-header themeColor">
+              <p class="card-title">FOR OTHER SIDE</p>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-toggle="collapse" href="#collapseOtherSide"
+                  role="button" aria-expanded="true" aria-controls="collapseOtherSide" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="collapse show" id="collapseOtherSide">
+              <div class="card-body">
+                <div class="row mb-2">
+
+                  <!-- left column -->
+                  <div class="col-md-6 card card-outlineTheme">
+
+                    <!-- #1 Strength -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Strength</label>
+                          <input id="otherSwotS1" type="text" class="form-control" placeholder="Enter Strength" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="otherSwotS1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="otherSwotS1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Strength -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotS2" type="text" class="form-control" placeholder="Enter Strength #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotS2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotS2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Strength -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotS3" type="text" class="form-control" placeholder="Enter Strength #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotS3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotS3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- right column -->
+                  <div class="col-md-6 card card-outlineTheme">
+
+                    <!-- #1 Opportunities -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Opportunities</label>
+                          <input id="otherSwotO1" type="text" class="form-control" placeholder="Enter Opportunity" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="otherSwotO1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="otherSwotO1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Opportunities -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotO2" type="text" class="form-control" placeholder="Enter Opportunity #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select"  id="otherSwotO2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotO2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Opportunities -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotO3" type="text" class="form-control" placeholder="Enter Opportunity #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotO3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotO3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- row-->
+
+                <div class="row">
+                  <!-- left column -->
+                  <div class="col-md-6 card card-outlineTheme">
+
+                    <!-- #1 Weakness -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Weakness</label>
+                          <input id="otherSwotW1" type="text" class="form-control" placeholder="Enter Weakness" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="otherSwotW1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="otherSwotW1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Weakness -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotW2" type="text" class="form-control" placeholder="Enter Weakness #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotW2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotW2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Weakness -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotW3" type="text" class="form-control" placeholder="Enter Weakness #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotW3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotW3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- right column -->
+                  <div class="col-md-6 card card-outlineTheme">
+
+                    <!-- #1 Threat -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Threat</label>
+                          <input id="otherSwotT1" type="text" class="form-control" placeholder="Enter Threat" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>N/P</label>
+                          <select class="custom-select" id="otherSwotT1np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label>Points</label>
+                          <select class="custom-select" id="otherSwotT1prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #2 Threat -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotT2" type="text" class="form-control" placeholder="Enter Threat #2" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotT2np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotT2prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- #3 Threat -->
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <input id="otherSwotT3" type="text" class="form-control" placeholder="Enter Threat #3" maxlength="120">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotT3np">
+                            <option>P</option>
+                            <option>N</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <select class="custom-select" id="otherSwotT3prior">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- /.FOR OTHER SIDE -->
+
+
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div class="footerContainer"></div>
+
+  </div>
+  <!-- ./wrapper -->
+
+  <div id="loadingView" class="loader" style="display:none">
+    <div class="text-center">
+      <img src="../dist/img/loading.gif" class="loaderImage" />
+    </div>
+  </div>
+
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+
+
+  <script src="../dist/js/swot-analysis.js"></script>
+  <script src="../dist/js/header-footer.js"></script>
+
+</body>
+
+</html>

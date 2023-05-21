@@ -11,7 +11,7 @@ document
     .addEventListener("click", createProject);
 
 function loadProjectList() {
-    dataTable = $('#tblData').DataTable({
+    var dataTable = $('#tblData').DataTable({
         paging: true,
         destroy: true,
         pageLength: 10,

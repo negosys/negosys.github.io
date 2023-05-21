@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEGOSYS | Admin Projects</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.css">
+  <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+  <style>
+    div.action-buttons {
+      white-space: nowrap;
+    }
+
+    div.action-buttons span {
+      display: inline-block;
+      min-width: 18px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <!-- Main Sidebar Container -->
+    <div class="mainsidebar"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2 mt-2">
+            <div class="col-sm-6">
+              <h1 class="ml-2">Select Customer project</h1>
+            </div>
+            <div class="col-sm-6">
+              
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-6 col-sm-4">
+              <div class="form-group">
+                <label>Select Customer:</label>
+                <select id="ddlCustomerList" class="form-control select2" data-dropdown-css-class="select2-purple"
+                  style="width: 100%;">
+                </select>
+  
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="tblData" class="table table-hover" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Project Name</th>
+                        <th>Description</th>
+                        <th class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+
+
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    
+    <div class="footerContainer"></div>
+    
+  </div>
+  <!-- ./wrapper -->
+
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../plugins/moment/moment.min.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+
+
+  <script type="module" src="../dist/js/admin-projects.js"></script>
+  <script src="../dist/js/header-footer.js"></script>
+</body>
+
+</html>

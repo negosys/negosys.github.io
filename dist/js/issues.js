@@ -1,13 +1,30 @@
+import * as user from "./adminlte.js"
+
+var userRole;
+var userNo = 0;
 
 var projectNo = "";
 var curIssuesNo = "";
 
-$(document).ready(function () {
+$(document).ready(async function () {
     loadIssueKind();
 
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
+    userNo = urlParams.get('userSn');
+
+    if (projectNo == null || projectNo == "") {
+        Swal.fire({
+            icon: 'error',
+            text: 'Invalid Url.'
+        });
+        return;
+    }
+    
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
+
 
     loadProjectIssueList();
     getIssueCount();
@@ -21,6 +38,11 @@ document
     .getElementById("btnNext")
     .addEventListener("click", nextPage);
 
+$("#tblData").on("click", '.deleteBtn', function (event) {
+    event.preventDefault()
+    var issueId = event.target.getAttribute("data-id");
+    deleteIssue(issueId);
+});
 
 function nextPage() {
     if (getIssueCount() < 5) {
@@ -30,8 +52,11 @@ function nextPage() {
         });
         return;
     }
-
-    location.href = "prior-issues.html?projectSn=" + projectNo;
+    if (userRole == "ADMIN") {
+        location.href = "prior-issues.html?projectSn=" + projectNo + "&userSn=" + userNo;
+    }else{
+        location.href = "prior-issues.html?projectSn=" + projectNo;
+    }
 }
 
 function loadIssueKind() {
@@ -67,8 +92,19 @@ function loadIssueKind() {
     });
 }
 
-function loadProjectIssueList() {
-    dataTable = $('#tblData').DataTable({
+async function loadProjectIssueList() {
+    var ajaxUrl;
+    var ajaxData;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issues";
+        ajaxData = { projectSn: projectNo, userSn: userNo };
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issuesByProjectSn"
+        ajaxData = { projectSn: projectNo };
+    }
+
+    var dataTable = $('#tblData').DataTable({
         paging: false,
         destroy: true,
         //pageLength: 10,
@@ -76,12 +112,14 @@ function loadProjectIssueList() {
         scrollY: true,
         //order: [[10, 'asc']],
         "ajax": {
-            url: 'https://api.negosys.co.kr/nego/issuesByProjectSn',
+            //url: 'https://api.negosys.co.kr/nego/issuesByProjectSn',
+            url: ajaxUrl,
             xhrFields: {
                 withCredentials: true
             },
             crossDomain: true,
-            data: { projectSn: projectNo },
+            //data: { projectSn: projectNo },
+            data: ajaxData,
             dataSrc: "",
         },
         "columns": [
@@ -92,8 +130,8 @@ function loadProjectIssueList() {
                 "render": function (data) {
                     return `
                             <div class="text-center">
-                                <a onclick=deleteIssue(${data}) class="btn btn-info text-white" style="cursor:pointer">
-                                    <i class="fa fa-trash-alt"></i> 
+                                <a data-id=${data} class="deleteBtn btn themeColor" >
+                                    <i data-id=${data} class="fa fa-trash-alt"></i> 
                                 </a>
                             </div>
                            `;
@@ -182,9 +220,16 @@ function addIssue() {
 
     $("#loadingView").show();
 
+    var ajaxUrl;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issue?userSn=" + userNo;
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issue"
+    }
+
     $.ajax({
-        url:
-            'https://api.negosys.co.kr/nego/issue',
+        url: ajaxUrl,
         type: "POST",
         xhrFields: {
             withCredentials: true
@@ -210,6 +255,7 @@ function addIssue() {
 }
 
 function deleteIssue(issueSn) {
+    //console.log(issueSn);
 
     if (issueSn == '') {
         Swal.fire({
@@ -219,15 +265,25 @@ function deleteIssue(issueSn) {
         return;
     }
 
+    var ajaxUrl;
+    var ajaxData;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issue?userSn=" + userNo;
+        ajaxData = { issueSn: issueSn, userSn: userNo };
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issue";
+        ajaxData = { issueSn: issueSn };
+    }
+
     $.ajax({
-        url:
-            'https://api.negosys.co.kr/nego/issue',
+        url: ajaxUrl,
         type: "DELETE",
         xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
-        data: { issueSn: issueSn },
+        data: ajaxData,
         success: function (data) {
             var x = JSON.stringify(data);
             console.log(x);

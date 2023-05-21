@@ -1,13 +1,20 @@
+import * as user from "./adminlte.js"
+
+var userRole;
+var userNo = 0;
+
 var projectNo = "";
 var currentIssue = "";
 var totalIssues = "";
 var issueLists;
 var issueSnList = [];
+var isSave = false;
 
-$(document).ready(function () {
+$(document).ready(async function () {
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
+    userNo = urlParams.get('userSn');
 
     if (projectNo == null || projectNo == "") {
         Swal.fire({
@@ -16,6 +23,9 @@ $(document).ready(function () {
         });
         return;
     }
+
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
 
     initialDropdownBox();
     loadSWOTList();
@@ -43,24 +53,43 @@ document
     .getElementById("btnNext")
     .addEventListener("click", nextPage);
 
-function nextPage() {
-    if (saveSWOT() == true) {
-        location.href = "swot-logic.html?projectSn=" + projectNo;
+async function nextPage() {
+    var saveSuccess = await saveSWOT();
+    if (isSave == true) {
+        if (userRole == "ADMIN") {
+            location.href = "swot-logic.html?projectSn=" + projectNo + "&userSn=" + userNo;
+        } else {
+            location.href = "swot-logic.html?projectSn=" + projectNo;
+        }
     }
 }
 
 function prevPage() {
-    location.href = "prior-issues.html?projectSn=" + projectNo;
+    if (userRole == "ADMIN") {
+        location.href = "prior-issues.html?projectSn=" + projectNo + "&userSn=" + userNo;
+    } else {
+        location.href = "prior-issues.html?projectSn=" + projectNo;
+    }
 }
 
 function loadSWOTList() {
     $("#loadingView").show();
 
+    var ajaxUrl;
+    var ajaxData;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issues";
+        ajaxData = { projectSn: projectNo, userSn: userNo };
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issuesByProjectSn"
+        ajaxData = { projectSn: projectNo };
+    }
+    
     $.ajax({
-        url:
-            'https://api.negosys.co.kr/nego/issuesByProjectSn',
+        url: ajaxUrl,
         type: "GET",
-        data: { projectSn: projectNo },
+        data: ajaxData,
         xhrFields: {
             withCredentials: true
         },
@@ -197,9 +226,9 @@ function loadOtherSide(item) {
 
 }
 
-function loadNextResult() {
+async function loadNextResult() {
     //save data before load another issue
-    saveSWOT();
+    await saveSWOT();
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
@@ -258,9 +287,9 @@ function loadNextResult() {
     });
 }
 
-function loadPrevResult() {
+async function loadPrevResult() {
     //save data before load another issue
-    saveSWOT();
+    await saveSWOT();
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
@@ -419,7 +448,7 @@ function initialDropdownBox() {
     }
 }
 
-function saveSWOT(btnId) {
+async function saveSWOT(btnId) {
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var issueId;
@@ -437,6 +466,8 @@ function saveSWOT(btnId) {
         });
         return;
     }
+
+    $("#loadingView").show();
 
     var meSwotSList = [];
     var meSwotWList = [];
@@ -547,9 +578,18 @@ function saveSWOT(btnId) {
     }
     //console.log(reqObj);
 
-    $.ajax({
-        url:
-            'https://api.negosys.co.kr/nego/issueSwot',
+    var ajaxUrl;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issueSwot?userSn=" + userNo;
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issueSwot"
+    }
+
+    isSave == false;
+
+    await $.ajax({
+        url: ajaxUrl,
         type: "PUT",
         xhrFields: {
             withCredentials: true
@@ -569,6 +609,8 @@ function saveSWOT(btnId) {
                     text: 'Data has been saved successfully.'
                 });
             }
+            $("#loadingView").hide();
+            isSave = true;
             return true;
         },
         error: function (error) {
@@ -577,6 +619,7 @@ function saveSWOT(btnId) {
                 icon: 'error',
                 text: 'Failed to update issue SWOT data.'
             });
+            $("#loadingView").hide();
             return false;
         }
     });

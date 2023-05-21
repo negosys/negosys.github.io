@@ -51,7 +51,7 @@ function loadSidebar() {
         <img src="../dist/img/user.png" alt="icon" class="iconImg brand-image">
               <span class="pl-3 text-white">Username</span>
       </a>
-      <a href="../login.html" class="nav-link">
+      <a href="#" onclick="logout()" class="nav-link">
         <img src="../dist/img/power.png" alt="icon" class="iconImg brand-image">
         <span class="pl-3 text-white">Logout</span>
       </a>    
@@ -74,4 +74,18 @@ function loadFooter() {
               `;
 
   $(".footerContainer").html(html);
+}
+function deleteCookies() {
+  var allCookies = document.cookie.split(';');
+
+  for (var i = 0; i < allCookies.length; i++)
+    document.cookie = allCookies[i] + "=;expires="
+      + new Date(0).toUTCString();
+
+}
+
+function logout(){
+  alert("sure logout?");
+  deleteCookies();
+  location.href = "../login.html";
 }

@@ -1,13 +1,20 @@
+import * as user from "./adminlte.js"
+
+var userRole;
+var userNo = 0;
+
 const draggables = document.querySelectorAll('.draggable');
 const containers = document.querySelectorAll('.othersideContainer');
 var projectNo = "";
 var totalIssues = "";
 var issueLists;
+var isSave = false;
 
-$(document).ready(function () {
+$(document).ready(async function () {
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
+    userNo = urlParams.get('userSn');
 
     if (projectNo == null || projectNo == "") {
         Swal.fire({
@@ -16,6 +23,9 @@ $(document).ready(function () {
         });
         return;
     }
+
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
 
     loadProjectIssueList();
 });
@@ -71,17 +81,35 @@ document
     .getElementById("btnNext")
     .addEventListener("click", nextPage);
 
-function nextPage() {
-    if (saveIssue() == true) {
-        location.href = "swot-analysis.html?projectSn=" + projectNo;
+async function nextPage() {
+    var saveSuccess = await saveIssue();
+    //console.log(isSave);
+    if (isSave == true) {
+        if (userRole == "ADMIN") {
+            location.href = "swot-analysis.html?projectSn=" + projectNo + "&userSn=" + userNo;
+        } else {
+            location.href = "swot-analysis.html?projectSn=" + projectNo;
+        }
     }
 }
 
 function prevPage() {
-    location.href = "issues.html?projectSn=" + projectNo;
+    if (userRole == "ADMIN") {
+        location.href = "issues.html?projectSn=" + projectNo + "&userSn=" + userNo;
+    } else {
+        location.href = "issues.html?projectSn=" + projectNo;
+    }
 }
 
-function saveIssue(btnId) {
+$(".container-fluid").on("change", '.priorInput', function (event) {
+    event.preventDefault();
+    var issueId = event.target.getAttribute("id");
+    console.log(issueId);
+    checkMaxValue(issueId);
+});
+
+//missing admin save issue API
+async function saveIssue(btnId) {
 
     var isCheck = checkPriority();
     if (isCheck == false) {
@@ -124,9 +152,7 @@ function saveIssue(btnId) {
 
     console.log(reqObj);
 
-    //return;
-
-    $.ajax({
+    await $.ajax({
         url:
             'https://api.negosys.co.kr/nego/updateIssuesPriorityAndReason',
         type: "PUT",
@@ -136,7 +162,7 @@ function saveIssue(btnId) {
         crossDomain: true,
         data: JSON.stringify(reqObj),
         contentType: "application/json",
-        success: function (data) {
+        success: async function (data) {
             var x = JSON.stringify(data);
             console.log(x);
 
@@ -146,7 +172,7 @@ function saveIssue(btnId) {
                     text: 'Data has been saved successfully.'
                 });
             }
-
+            isSave = true;
             return true;
         },
         error: function (error) {
@@ -155,20 +181,33 @@ function saveIssue(btnId) {
                 icon: 'error',
                 text: 'Failed to update issue priority and reason'
             });
+            isSave = false;
             return false;
         }
     });
 }
 
-function loadProjectIssueList() {
+async function loadProjectIssueList() {
     $("#loadingView").show();
+
+    var ajaxUrl;
+    var ajaxData;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issues";
+        ajaxData = { projectSn: projectNo, userSn: userNo };
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issuesByProjectSn"
+        ajaxData = { projectSn: projectNo };
+    }
+
     var html = "";
     var otherhtml = "";
+
     $.ajax({
-        url:
-            'https://api.negosys.co.kr/nego/issuesByProjectSn',
+        url: ajaxUrl,
         type: "GET",
-        data: { projectSn: projectNo },
+        data: ajaxData,
         xhrFields: {
             withCredentials: true
         },
@@ -186,7 +225,7 @@ function loadProjectIssueList() {
             //for me side sort
             $.each(data, function (index, itemData) {
                 var meOrder = itemData.meOrder;
-                var otherOrder = itemData.otherOrder;
+                //var otherOrder = itemData.otherOrder;
 
                 if (meOrder == null) {
                     //meOrder = index + 1;
@@ -202,7 +241,7 @@ function loadProjectIssueList() {
                     '<div class="row"><div class="col-md-12"><div class="small-box"><div class="inner"><div class="row"><div class="col-10">';
                 html += `<p class="ml-2 meIssue-${itemData.issueSn}">${itemData.issueKind} > ${itemData.issue}</p>
                 </div><div class="col-2">
-                <input id="meId${index + 1}" type="number" min="1" max="${totalIssues}" class="form-control allow_numeric mePrior-${itemData.issueSn}" value="${meOrder}" onchange="checkMaxValue(this)"></div></div>
+                <input id="meId${index + 1}" type="number" min="1" max="${totalIssues}" class="priorInput form-control allow_numeric mePrior-${itemData.issueSn}" value="${meOrder}"></div></div>
                 <textarea class="form-control meReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.meReason}</textarea></div></div></div></div>`;
 
             });
@@ -226,7 +265,7 @@ function loadProjectIssueList() {
                     '<div class="row"><div class="col-md-12"><div class="small-box"><div class="inner"><div class="row"><div class="col-10">';
                 otherhtml += `<p class="ml-2 otherIssue-${itemData.issueSn}">${itemData.issueKind} > ${itemData.issue}</p>
                 </div><div class="col-2">
-                <input id="otherId${index + 1}" type="number" min="1" max="${totalIssues}" class="form-control allow_numeric otherPrior-${itemData.issueSn}" value="${otherOrder}" onchange="checkMaxValue(this)"></div></div>
+                <input id="otherId${index + 1}" type="number" min="1" max="${totalIssues}" class="priorInput form-control allow_numeric otherPrior-${itemData.issueSn}" value="${otherOrder}"></div></div>
                 <textarea class="form-control otherReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.otherReason}</textarea></div></div></div></div>`;
 
             });
@@ -247,14 +286,16 @@ function loadProjectIssueList() {
 }
 
 function checkMaxValue(x) {
-    if (x.value > totalIssues) {
-        x.value = totalIssues;
+    var id = $("#".concat(x));
+    var idValue = $("#".concat(x)).val();
+    if (idValue > totalIssues) {
+        id.val(totalIssues);
         Swal.fire({
             icon: 'warning',
             text: 'Maximum priority cannot more than ' + totalIssues
         });
-    } else if (x.value <= 0) {
-        x.value = 1;
+    } else if (idValue <= 0) {
+        id.val(1);
         Swal.fire({
             icon: 'warning',
             text: 'Minimum priority cannot less than 0'

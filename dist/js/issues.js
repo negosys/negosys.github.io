@@ -13,6 +13,8 @@ $(document).ready(async function () {
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
     userNo = urlParams.get('userSn');
+    //Temp set value
+    userNo = 1;
 
     if (projectNo == null || projectNo == "") {
         Swal.fire({

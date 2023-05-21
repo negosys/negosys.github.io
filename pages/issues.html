@@ -20,7 +20,18 @@
   <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../dist/css/loading.css">
-  
+
+  <style>
+    .select2-container .select2-selection--single {
+      height: 38px !important;
+      border-color: #5D66DF;
+    }
+
+    #btnAddIssue {
+      position: absolute;
+      top: 12%;
+    }
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
@@ -41,10 +52,8 @@
             </div>
             <div class="col-sm-6">
               <div class="float-sm-right">
-                <a type="button" href="projects.html" class="btn themeColor"><i
-                    class="fa fa-arrow-left"></i> Back</a>
-                <a id="btnNext" type="button" href="#" class="btn themeColor">Next <i
-                    class="fa fa-arrow-right"></i></a>
+                <a type="button" href="projects.html" class="btn themeColor"><i class="fa fa-arrow-left"></i> Back</a>
+                <a id="btnNext" type="button" href="#" class="btn themeColor">Next <i class="fa fa-arrow-right"></i></a>
               </div>
             </div>
           </div>
@@ -79,9 +88,8 @@
               </div>
 
               <div class="col-6 col-sm-4 mt-4">
-                <button id="btnAddIssue" type="button" class="btn btn-info themeColor"><i class="fa fa-plus"></i>
-                  Add
-                  Issue</button>
+                <button id="btnAddIssue" type="button" class="btn themeColor"><i class="fa fa-plus"></i>
+                  Add Issue</button>
               </div>
 
             </div>

@@ -2,13 +2,6 @@ import * as user from "./adminlte.js"
 
 var userRole;
 
-$(document).ready(async function () {
-
-    var userDetails = await user.getUserDetails();
-    userRole = userDetails.userLevel;
-    
-});
-
 document
     .getElementById("btnLogin")
     .addEventListener("click", loginPost);
@@ -18,8 +11,8 @@ function loginPost() {
     var username = document.getElementById('emailAdd').value;
     var password = document.getElementById('password').value;
 
-    username = 'yuie@evonit.net';
-    password = 'asdf!@34';
+    //username = 'yuie@evonit.net';
+    //password = 'asdf!@34';
     //console.log(username);
 
     if (username == '') {
@@ -46,18 +39,21 @@ function loginPost() {
         },
         crossDomain: true,
         data: { username: username, password: password },
-        success: function (data) {
+        success: async function (data) {
             var x = JSON.stringify(data);
             console.log(x);
             let y = document.cookie;
             console.log(y);
 
-            if(userRole == "ADMIN"){
+            var userDetails = await user.getUserDetails();
+            userRole = userDetails.userLevel;
+
+            if (userRole == "ADMIN") {
                 location.href = "pages/admin-projects.html";
-            }else{
+            } else {
                 location.href = "pages/projects.html";
             }
-            
+
         },
         error: function (error) {
             console.log(JSON.stringify(error));

@@ -108,7 +108,7 @@ function logout() {
   clearHOnlySessionCookie("userRole");
   clearHOnlySessionCookie("userSn");
   console.log(document.cookie);
-  //location.href = "../login.html";
+  location.href = "../login.html";
 }
 
 function loadProjectPage() {

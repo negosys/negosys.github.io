@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEGOSYS | SWOT Logic</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.css">
+  <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="../dist/css/loading.css">
+
+
+  <style>
+
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <!-- Main Sidebar Container -->
+    <div class="mainsidebar"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2 mt-2">
+            <div class="col-sm-6">
+              <h1>SWOT Logic</h1>
+            </div>
+            <div class="col-sm-6">
+              <div class="float-sm-right">
+                <a id="btnSave" type="button" class="btn themeColorOutline"><i class="fa fa-save"></i>
+                  Save</a>
+                <a id="btnBack" type="button" class="btn themeColor"><i
+                    class="fa fa-arrow-left"></i>
+                  Back</a>
+                <a id="btnNext" type="button" class="btn themeColor">Next <i
+                    class="fa fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="issueTitle"></div>
+            </div>
+            <div class="col-md-8">
+              <div class="float-sm-right">
+                <ul class="nav nav-tabs ml-auto p-2">
+                  <li class="nav-item"><a id="btnPrevIssue" class="nav-link disabled iconDisableThemeColor" href="#"><i
+                        class="fas fa-chevron-left iconThemeColor"></i></a></li>
+                  <div class="totalIssue"></div>
+                  <li class="nav-item"><a id="btnNextIssue" class="nav-link" href="#"><i
+                        class="fas fa-chevron-right iconThemeColor"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <!----------------- FOR MY SIDE ----------------->
+            <div class="col-md-6">
+              <div class="btn-lg themeColor mb-4 text-center"><b>FOR MY SIDE</b></div>
+
+              <!-- #1 Me Strength -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Strength</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Me Strength -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="meSwotS1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotS1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotS1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotS1logic" type="text" class="form-control hiddenField"
+                      placeholder="Tell me how to edify your strength" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Me Strength -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotS2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotS2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotS2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotS2logic" type="text" class="form-control hiddenField"
+                      placeholder="Tell me how to edify your strength" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Me Strength -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotS3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotS3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotS3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotS3logic" type="text" class="form-control hiddenField"
+                      placeholder="Tell me how to edify your strength" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--  Me Weakness -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Weakness</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Me Weakness -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="meSwotW1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotW1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotW1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotW1logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you make up for your weakness" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Me Weakness -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotW2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotW2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotW2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotW2logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you make up for your weakness" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Me Weakness -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotW3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotW3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotW3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotW3logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you make up for your weakness" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--  Me Opportunity -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Opportunity</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Me Opportunity -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="meSwotO1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotO1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotO1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotO1logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you take advantage of this opportunity" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Me Opportunity -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotO2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotO2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotO2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotO2logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you take advantage of this opportunity" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Me Opportunity -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotO3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotO3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotO3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotO3logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you take advantage of this opportunity" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--  Me Thread -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Thread</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Me Thread -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="meSwotT1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotT1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotT1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotT1logic" type="text" class="form-control hiddenField"
+                      placeholder="How this thread can affect you" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Me Thread -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotT2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotT2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotT2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotT2logic" type="text" class="form-control hiddenField"
+                      placeholder="How this thread can affect you" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Me Thread -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="meSwotT3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotT3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="meSwotT3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="meSwotT3logic" type="text" class="form-control hiddenField"
+                      placeholder="How this thread can affect you" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- /.FOR MY SIDE -->
+
+            <!----------------- FOR OTHER SIDE ----------------->
+            <div class="col-md-6">
+              <div class="btn-lg themeColor mb-4 text-center"><b>FOR OTHER SIDE</b></div>
+
+              <!-- #1 Other Strength -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Strength</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Other Strength -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="otherSwotS1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotS1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotS1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotS1logic" type="text" class="form-control hiddenField"
+                      placeholder="Tell me how to edify your strength" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Other Strength -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotS2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotS2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotS2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotS2logic" type="text" class="form-control hiddenField"
+                      placeholder="Tell me how to edify your strength" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Other Strength -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotS3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotS3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotS3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotS3logic" type="text" class="form-control hiddenField"
+                      placeholder="Tell me how to edify your strength" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--  Other Weakness -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Weakness</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Other Weakness -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="otherSwotW1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotW1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotW1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotW1logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you make up for your weakness" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Other Weakness -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotW2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotW2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotW2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotW2logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you make up for your weakness" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Other Weakness -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotW3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotW3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotW3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotW3logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you make up for your weakness" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--  Other Opportunity -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Opportunity</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Other Opportunity -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="otherSwotO1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotO1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotO1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotO1logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you take advantage of this opportunity" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Other Opportunity -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotO2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotO2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotO2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotO2logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you take advantage of this opportunity" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Other Opportunity -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotO3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotO3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotO3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotO3logic" type="text" class="form-control hiddenField"
+                      placeholder="How can you take advantage of this opportunity" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--  Other Thread -->
+              <div class="card">
+                <div class="card-header themeColor1">
+                  <h3 class="card-title">Thread</h3>
+                </div>
+                <div class="card-body">
+
+                  <!-- #1 Other Thread -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p id="otherSwotT1"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotT1np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotT1prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotT1logic" type="text" class="form-control hiddenField"
+                      placeholder="How this thread can affect you" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #2 Other Thread -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotT2"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotT2np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotT2prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotT2logic" type="text" class="form-control hiddenField"
+                      placeholder="How this thread can affect you" maxlength="120"></textarea>
+                  </div>
+
+                  <!-- #3 Other Thread -->
+                  <div class="row mt-3">
+                    <div class="col-md-8">
+                      <p id="otherSwotT3"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotT3np"></p>
+                    </div>
+                    <div class="col-md-2">
+                      <p id="otherSwotT3prior"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <textarea id="otherSwotT3logic" type="text" class="form-control hiddenField"
+                      placeholder="How this thread can affect you" maxlength="120"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- /.FOR OTHER SIDE -->
+
+
+          </div>
+          <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div class="footerContainer"></div>
+
+  </div>
+  <!-- ./wrapper -->
+
+  <div id="loadingView" class="loader" style="display:none">
+    <div class="text-center">
+      <img src="../dist/img/loading.gif" class="loaderImage" />
+    </div>
+  </div>
+
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+
+
+  <script type="module" src="../dist/js/swot-logic.js"></script>
+  <script src="../dist/js/header-footer.js"></script>
+
+</body>
+
+</html>

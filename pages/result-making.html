@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEGOSYS | Result Making</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.css">
+  <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="../dist/css/loading.css">
+
+
+  <style>
+
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <!-- Main Sidebar Container -->
+    <div class="mainsidebar"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2 mt-2">
+            <div class="col-sm-6">
+              <h1>Result Making</h1>
+            </div>
+            <div class="col-sm-6">
+              <div class="float-sm-right">
+                <a id="btnBack" type="button" href="swot-logic.html" class="btn themeColor"><i class="fa fa-arrow-left"></i>
+                  Back</a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="issueTitle"></div>
+            </div>
+            <div class="col-md-8">
+              <div class="float-sm-right">
+                <ul class="nav nav-tabs ml-auto p-2" >
+                  <li class="nav-item"><a id="btnPrevIssue" class="nav-link disabled iconDisableThemeColor" href="#"><i
+                        class="fas fa-chevron-left iconThemeColor"></i></a></li>
+                  <div class="totalIssue"></div>
+                  <li class="nav-item"><a id="btnNextIssue" class="nav-link" href="#"><i
+                        class="fas fa-chevron-right iconThemeColor"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-center mt-3 mb-3">
+            <h5 class="btn-lg themeColor1">Argumentqation</h5>
+          </div>
+
+          <div class="tab-content">
+            <div class="row">
+              <!-- left column -->
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header themeColor text-center">
+                    <h5>HOOKER</h5>
+                  </div>
+                  <div class="card-body hookerContainer" style="height: 25em;">
+
+                  </div>
+                 
+                </div>
+              </div>
+
+              <!-- right column -->
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header themeColor text-center">
+                    <h5>WATNA</h5>
+                  </div>
+                  <div class="card-body watnaContainer" style="height: 25em;">
+
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div class="footerContainer"></div>
+
+  </div>
+  <!-- ./wrapper -->
+
+  <div id="loadingView" class="loader" style="display:none">
+    <div class="text-center">
+      <img src="../dist/img/loading.gif" class="loaderImage" />
+    </div>
+  </div>
+
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+
+
+  <script src="../dist/js/result-making.js"></script>
+  <script src="../dist/js/header-footer.js"></script>
+
+</body>
+
+</html>

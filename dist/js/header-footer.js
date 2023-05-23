@@ -87,24 +87,17 @@ function loadFooter() {
 }
 
 function deleteCookies() {
-  var allCookies = document.cookie.split(';');
-  console.log(allCookies);
+  var Cookies = document.cookie.split(';');
 
-  for (var i = 0; i < allCookies.length; i++)
-    document.cookie = allCookies[i] + "=;expires="
-      + 'expires = Thu, 01 Jan 1970 00:00:00 GMT';
-
-  document.cookie = 'name=st; expires=' 
-  + 'expires = Thu, 01 Jan 1970 00:00:00 GMT' 
-  + '; path=/; domain=.negosys.co.kr';
-
-  console.log(document.cookie);
+  // set 1 Jan, 1970 expiry for every cookies
+  for (var i = 0; i < Cookies.length; i++)
+    document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
 }
 
-function clearHOnlySessionCookie(name){
+function clearHOnlySessionCookie(name) {
   //var domain = domain || document.domain;
   var path = "/";
-  document.cookie = name + "=null; path=" + path+";";
+  document.cookie = name + "=null; path=" + path + ";";
 
 };
 
@@ -113,7 +106,7 @@ function logout() {
   deleteCookies();
   clearHOnlySessionCookie("st");
   clearHOnlySessionCookie("userRole");
-  clearHOnlySessionCookie("UserSn");
+  clearHOnlySessionCookie("userSn");
   console.log(document.cookie);
   //location.href = "../login.html";
 }

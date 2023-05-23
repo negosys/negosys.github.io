@@ -55,7 +55,7 @@ document
 
 async function nextPage() {
     var saveSuccess = await saveSWOT();
-    
+
     if (isSave == true) {
         if (userRole == "ADMIN") {
             location.href = "admin-result-making.html?projectSn=" + projectNo + "&userSn=" + userNo;
@@ -96,7 +96,7 @@ function loadSWOTList() {
         },
         crossDomain: true,
         success: function (data) {
-            $("#loadingView").show();
+
             var issueTitle = "";
             var totalIssueContent = "";
 
@@ -108,7 +108,7 @@ function loadSWOTList() {
             });
 
             issueLists = data;
-
+            console.log(data);
             $.each(data, function (index, itemData) {
                 if (index == 0) {
                     issueTitle += `
@@ -118,6 +118,9 @@ function loadSWOTList() {
                     totalIssueContent += `
                         <h5 class="mt-2 mr-3 ml-3 issueId">1 / ${totalIssues}  Issues</h5>
                        `;
+
+                    loadMeSide(itemData);
+                    loadOtherSide(itemData);
                 }
 
                 var issueSnMatch = {
@@ -127,8 +130,7 @@ function loadSWOTList() {
 
                 issueSnList.push(issueSnMatch);
 
-                loadMeSide(itemData);
-                loadOtherSide(itemData);
+
             });
 
             //console.log(issueSnList);
@@ -156,12 +158,14 @@ function loadMeSide(item) {
     $.each(s, function (index, itemData) {
         var i = parseInt(index) + 1;
         var id = "#meSwotS".concat(i);
-        console.log(itemData);
+
         if (itemData.info != "") {
+            console.log(itemData);
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).val(itemData.logic);
+            $(id.concat("logic")).text(itemData.logic);
+            console.log($(id.concat("logic")).val());
             $(id.concat("logic")).removeClass("hiddenField");
         }
     });
@@ -173,7 +177,7 @@ function loadMeSide(item) {
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).val(itemData.logic);
+            $(id.concat("logic")).text(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
         }
 
@@ -186,7 +190,7 @@ function loadMeSide(item) {
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).val(itemData.logic);
+            $(id.concat("logic")).text(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
         }
 
@@ -199,7 +203,7 @@ function loadMeSide(item) {
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).val(itemData.logic);
+            $(id.concat("logic")).text(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
         }
 
@@ -219,7 +223,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).val(itemData.logic);
+        $(id.concat("logic")).text(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -229,7 +233,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).val(itemData.logic);
+        $(id.concat("logic")).text(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -239,7 +243,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).val(itemData.logic);
+        $(id.concat("logic")).text(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -249,7 +253,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).val(itemData.logic);
+        $(id.concat("logic")).text(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -387,25 +391,25 @@ function clearMeSide() {
         $(sid).html('');
         $(sid.concat("np")).html('');
         $(sid.concat("prior")).html('');
-        $(sid.concat("logic")).val('');
+        $(sid.concat("logic")).text('');
         $(sid.concat("logic")).addClass("hiddenField");
 
         $(wid).html('');
         $(wid.concat("np")).html('');
         $(wid.concat("prior")).html('');
-        $(wid.concat("logic")).val('');
+        $(wid.concat("logic")).text('');
         $(wid.concat("logic")).addClass("hiddenField");
 
         $(oid).html('');
         $(oid.concat("np")).html('');
         $(oid.concat("prior")).html('');
-        $(oid.concat("logic")).val('');
+        $(oid.concat("logic")).text('');
         $(oid.concat("logic")).addClass("hiddenField");
 
         $(tid).html('');
         $(tid.concat("np")).html('');
         $(tid.concat("prior")).html('');
-        $(tid.concat("logic")).val('');
+        $(tid.concat("logic")).text('');
         $(tid.concat("logic")).addClass("hiddenField");
     }
 }
@@ -420,25 +424,25 @@ function clearOtherSide() {
         $(sid).html('');
         $(sid.concat("np")).html('');
         $(sid.concat("prior")).html('');
-        $(sid.concat("logic")).val('');
+        $(sid.concat("logic")).text('');
         $(sid.concat("logic")).addClass("hiddenField");
 
         $(wid).html('');
         $(wid.concat("np")).html('');
         $(wid.concat("prior")).html('');
-        $(wid.concat("logic")).val('');
+        $(wid.concat("logic")).text('');
         $(wid.concat("logic")).addClass("hiddenField");
 
         $(oid).html('');
         $(oid.concat("np")).html('');
         $(oid.concat("prior")).html('');
-        $(oid.concat("logic")).val('');
+        $(oid.concat("logic")).text('');
         $(oid.concat("logic")).addClass("hiddenField");
 
         $(tid).html('');
         $(tid.concat("np")).html('');
         $(tid.concat("prior")).html('');
-        $(tid.concat("logic")).val('');
+        $(tid.concat("logic")).text('');
         $(tid.concat("logic")).addClass("hiddenField");
     }
 }
@@ -614,7 +618,7 @@ async function saveSWOT(btnId) {
             }
             $("#loadingView").hide();
             isSave = true;
-            
+
             return true;
         },
         error: function (error) {
@@ -623,7 +627,7 @@ async function saveSWOT(btnId) {
                 icon: 'error',
                 text: 'Failed to update issue SWOT data.'
             });
-            $("#loadingView").hide(); 
+            $("#loadingView").hide();
             return false;
         }
     });

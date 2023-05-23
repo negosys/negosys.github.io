@@ -62,6 +62,7 @@ function nextPage() {
 }
 
 function loadIssueKind() {
+    $("#loadingView").show();
     $.ajax({
         url:
             'https://api.negosys.co.kr/nego/issueKind',
@@ -83,6 +84,7 @@ function loadIssueKind() {
                     text: itemData.issueKind
                 }));
             });
+            $("#loadingView").hide();
         },
         error: function (error) {
             console.log(JSON.stringify(error));
@@ -90,11 +92,14 @@ function loadIssueKind() {
                 icon: 'error',
                 text: 'Failed to load issue kind.'
             });
+            $("#loadingView").hide();
         }
     });
 }
 
 async function loadProjectIssueList() {
+    $("#loadingView").show();
+
     var ajaxUrl;
     var ajaxData;
 
@@ -141,6 +146,7 @@ async function loadProjectIssueList() {
             }
         ]
     });
+    $("#loadingView").hide();
     //console.log(dataTable.data().count());
 }
 
@@ -151,6 +157,7 @@ function getIssueCount() {
 
 $('#ddlIssueKind').on('select2:select', function (e) {
     var selectedIssueKind = e.params.data.id;
+    $("#loadingView").show();
     $.ajax({
         url: 'https://api.negosys.co.kr/nego/issueKind',
         type: 'GET',
@@ -176,6 +183,7 @@ $('#ddlIssueKind').on('select2:select', function (e) {
                     });
                 }
             });
+            $("#loadingView").hide();
         },
         error: function (e) {
             console.log(e);
@@ -183,6 +191,7 @@ $('#ddlIssueKind').on('select2:select', function (e) {
                 icon: 'error',
                 text: 'Failed to retrieve Issues List!'
             });
+            $("#loadingView").hide();
         }
     });
 });

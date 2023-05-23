@@ -629,11 +629,22 @@ async function saveSWOT(btnId) {
 function refreshSWOTList() {
     $("#loadingView").show();
 
+    var ajaxUrl;
+    var ajaxData;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issues";
+        ajaxData = { projectSn: projectNo, userSn: userNo };
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issuesByProjectSn"
+        ajaxData = { projectSn: projectNo };
+    }
+    
+
     $.ajax({
-        url:
-            'https://api.negosys.co.kr/nego/issuesByProjectSn',
+        url: ajaxUrl,
         type: "GET",
-        data: { projectSn: projectNo },
+        data: ajaxData,
         xhrFields: {
             withCredentials: true
         },

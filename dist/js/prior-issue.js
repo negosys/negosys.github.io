@@ -3,8 +3,8 @@ import * as user from "./adminlte.js"
 var userRole;
 var userNo = 0;
 
-const draggables = document.querySelectorAll('.draggable');
-const containers = document.querySelectorAll('.othersideContainer');
+
+
 var projectNo = "";
 var totalIssues = "";
 var issueLists;
@@ -30,41 +30,89 @@ $(document).ready(async function () {
     loadProjectIssueList();
 });
 
-draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', () => {
-        draggable.classList.add('dragging')
+//------------me side------------
+function InitialMeDragFunction() {
+    let draggables = document.querySelectorAll('.medraggable');
+    let containers = document.querySelectorAll('.drag-mecontainer');
+
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('medragging')
+        })
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('medragging')
+        })
     })
 
-    draggable.addEventListener('dragend', () => {
-        draggable.classList.remove('dragging')
+    containers.forEach(container => {
+        container.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElementMe(container, e.clientY)
+            const draggable = document.querySelector('.medragging')
+            if (afterElement == null) {
+                container.appendChild(draggable)
+            } else {
+                container.insertBefore(draggable, afterElement)
+            }
+        })
     })
-})
 
-containers.forEach(container => {
-    container.addEventListener('dragover', e => {
-        e.preventDefault()
-        const afterElement = getDragAfterElement(container, e.clientY)
-        const draggable = document.querySelector('.dragging')
-        if (afterElement == null) {
-            container.appendChild(draggable)
-        } else {
-            container.insertBefore(draggable, afterElement)
-        }
+    function getDragAfterElementMe(container, y) {
+        const draggableElements = [...container.querySelectorAll('.medraggable:not(.medragging)')]
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect()
+            const offset = y - box.top - box.height / 2
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child }
+            } else {
+                return closest
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element
+    }
+}
+
+function InitialOtherDragFunction() {
+    let otherdraggables = document.querySelectorAll('.otherdraggable');
+    let othercontainers = document.querySelectorAll('.drag-othercontainer');
+
+    otherdraggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('otherdragging')
+        })
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('otherdragging')
+        })
     })
-})
 
-function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+    othercontainers.forEach(container => {
+        container.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElement(container, e.clientY)
+            const draggable = document.querySelector('.otherdragging')
+            if (afterElement == null) {
+                container.appendChild(draggable)
+            } else {
+                container.insertBefore(draggable, afterElement)
+            }
+        })
+    })
 
-    return draggableElements.reduce((closest, child) => {
-        const box = child.getBoundingClientRect()
-        const offset = y - box.top - box.height / 2
-        if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child }
-        } else {
-            return closest
-        }
-    }, { offset: Number.NEGATIVE_INFINITY }).element
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.otherdraggable:not(.otherdragging)')]
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect()
+            const offset = y - box.top - box.height / 2
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child }
+            } else {
+                return closest
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element
+    }
 }
 
 document
@@ -111,38 +159,41 @@ $(".container-fluid").on("change", '.priorInput', function (event) {
 //missing admin save issue API
 async function saveIssue(btnId) {
 
-    var isCheck = checkPriority();
-    if (isCheck == false) {
-        return false;
-    }
+    //var isCheck = checkPriority();
+    //if (isCheck == false) {
+    //return false;
+    //}
 
     var updateIssueList = [];
 
-    $.each(issueLists, function (index, itemData) {
-        var iSn = itemData.issueSn;
 
-        //=====me side=====
-        var idMePrior = '.mePrior-'.concat(iSn);
-        var idReasonMe = '.meReason-'.concat(iSn);
-        var txtMePrior = $(idMePrior).val();
+    var meInputs = $(".drag-mecontainer").find(".medraggable"); //meReason-9
+    var meReason = $(".drag-mecontainer").find(".meReason");
+    $('.drag-mecontainer').find('textarea').each(function (index, item) {
+        console.log(index);
+        var iSn = $(this).attr('id-data');
 
-        //=====other side=====
-        var idOtherPrior = '.otherPrior-'.concat(iSn);
-        var idReasonOther = '.otherReason-'.concat(iSn);
-        var txtOtherPrior = $(idOtherPrior).val();
+        //console.log($(this).val());
 
         var newIssue = {
-            issueSn: itemData.issueSn,
-            meReason: $(idReasonMe).val(),
-            otherReason: $(idReasonOther).val(),
-            meOrder: parseInt(txtMePrior),
-            otherOrder: parseInt(txtOtherPrior)
+            issueSn: iSn,
+            meReason: $(this).val(),
+            otherReason: $(".otherReason-".concat(iSn)).val(),
+            meOrder: parseInt(index + 1),
+            otherOrder: ""
         };
 
         updateIssueList.push(newIssue);
-
-        //console.log(updateIssueList);
     });
+
+    $('.drag-othercontainer').find('textarea').each(function (index, item) {
+        var iSn = $(this).attr('id-data');
+        var objIndex = updateIssueList.findIndex((obj => obj.issueSn == iSn));
+        updateIssueList[objIndex].otherOrder = parseInt(index + 1);
+
+    });
+
+    //console.log(updateIssueList);
 
 
     let reqObj = {
@@ -204,6 +255,12 @@ async function loadProjectIssueList() {
     var html = "";
     var otherhtml = "";
 
+    var mePriorHtml = "";
+    var meDragHtml = "";
+    var otherPriorHtml = "";
+    var otherDragHtml = "";
+
+
     $.ajax({
         url: ajaxUrl,
         type: "GET",
@@ -232,17 +289,23 @@ async function loadProjectIssueList() {
                     meOrder = 1;
                 }
 
-                //console.log(itemData);
-                //html +=
-                //'<div class="row"><div class="col-md-2"><div class="small-box prior"><div class="inner text-center">';
-                //html += `<p>${index + 1}</p></div></div></div>`;
-                //html += `<input type="text" class=" no-border mePrior-${itemData.issueSn}" value="${meOrder}"></div></div></div>`;
-                html +=
-                    '<div class="row"><div class="col-md-12"><div class="small-box"><div class="inner"><div class="row"><div class="col-10">';
-                html += `<p class="ml-2 meIssue-${itemData.issueSn}">${itemData.issueKind} > ${itemData.issue}</p>
-                </div><div class="col-2">
-                <input id="meId${index + 1}" type="number" min="1" max="${totalIssues}" class="priorInput form-control allow_numeric mePrior-${itemData.issueSn}" value="${meOrder}"></div></div>
-                <textarea class="form-control meReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.meReason}</textarea></div></div></div></div>`;
+
+                mePriorHtml += `
+                <div class="small-box prior">
+                <div class="inner text-center">
+                  <p>${index + 1}</p>
+                </div>
+              </div>
+                `;
+
+                meDragHtml += `
+                <div class="small-box draggable medraggable" draggable="true">
+                        <div class="inner">
+                          <p class="ml-2">${itemData.issueKind} > ${itemData.issue}</p>
+                          <textarea id-data="${itemData.issueSn}" class="form-control meReason" placeholder="Enter reason" maxlength="256">${itemData.meReason}</textarea>
+                        </div>
+                      </div>
+                `;
 
             });
 
@@ -261,17 +324,33 @@ async function loadProjectIssueList() {
                     otherOrder = 1;
                 }
 
-                otherhtml +=
-                    '<div class="row"><div class="col-md-12"><div class="small-box"><div class="inner"><div class="row"><div class="col-10">';
-                otherhtml += `<p class="ml-2 otherIssue-${itemData.issueSn}">${itemData.issueKind} > ${itemData.issue}</p>
-                </div><div class="col-2">
-                <input id="otherId${index + 1}" type="number" min="1" max="${totalIssues}" class="priorInput form-control allow_numeric otherPrior-${itemData.issueSn}" value="${otherOrder}"></div></div>
-                <textarea class="form-control otherReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.otherReason}</textarea></div></div></div></div>`;
+                otherPriorHtml += `
+                <div class="small-box prior">
+                <div class="inner text-center">
+                  <p>${index + 1}</p>
+                </div>
+              </div>
+                `;
 
+                otherDragHtml += `
+                <div class="small-box draggable otherdraggable" draggable="true">
+                        <div class="inner">
+                          <p class="ml-2">${itemData.issueKind} > ${itemData.issue}</p>
+                          <textarea id-data="${itemData.issueSn}" class="form-control otherReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.otherReason}</textarea>
+                        </div>
+                      </div>
+                `;
             });
 
-            $(".mysideContainer").html(html);
-            $(".othersideContainer").html(otherhtml);
+            $(".prior-mecontainer").html(mePriorHtml);
+            $(".drag-mecontainer").html(meDragHtml);
+
+            $(".prior-othercontainer").html(otherPriorHtml);
+            $(".drag-othercontainer").html(otherDragHtml);
+
+            InitialMeDragFunction();
+            InitialOtherDragFunction();
+
             $("#loadingView").hide();
         },
         error: function (error) {

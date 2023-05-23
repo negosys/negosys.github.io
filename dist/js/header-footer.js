@@ -1,7 +1,17 @@
 
-$(document).ready(function () {
+var uName = "";
+var uLevel = "";
+
+$(document).ready(async function () {
+
+  var userD = await getUserDetails();
+  uName = userD.userNm;
+  uLevel = userD.userLevel;
+
   loadSidebar();
   loadFooter();
+
+
 });
 
 function loadSidebar() {
@@ -23,7 +33,7 @@ function loadSidebar() {
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           <li class="nav-item">
-            <a href="projects.html" class="nav-link">
+            <a href="#" onclick="loadProjectPage()" class="nav-link">
               <!--i class="fas fa-lg fa-plus-square mr-2"></i-->
               <img src="../dist/img/plus.png" alt="icon" class="iconImg brand-image img-square elevation-3">
               <p class="text text-white">
@@ -49,7 +59,7 @@ function loadSidebar() {
     <div class="sidebar-custom">
       <a href="#" class="nav-link">
         <img src="../dist/img/user.png" alt="icon" class="iconImg brand-image">
-              <span class="pl-3 text-white">Username</span>
+              <span id="txtUsername" class="pl-3 text-white">${uName}</span>
       </a>
       <a href="#" onclick="logout()" class="nav-link">
         <img src="../dist/img/power.png" alt="icon" class="iconImg brand-image">
@@ -75,8 +85,10 @@ function loadFooter() {
 
   $(".footerContainer").html(html);
 }
+
 function deleteCookies() {
   var allCookies = document.cookie.split(';');
+  console.log(allCookies);
 
   for (var i = 0; i < allCookies.length; i++)
     document.cookie = allCookies[i] + "=;expires="
@@ -84,8 +96,36 @@ function deleteCookies() {
 
 }
 
-function logout(){
-  alert("sure logout?");
+function logout() {
+  //alert("sure logout?");
   deleteCookies();
-  location.href = "../login.html";
+  //location.href = "../login.html";
+}
+
+function loadProjectPage() {
+  if (uLevel == "ADMIN") {
+    location.href = "admin-projects.html";
+  } else {
+    location.href = "projects.html";
+  }
+}
+
+async function getUserDetails() {
+  let result;
+
+  try {
+    result = await $.ajax({
+      url:
+        'https://api.negosys.co.kr/user/whoami',
+      type: "GET",
+      xhrFields: {
+        withCredentials: true
+      },
+      crossDomain: true
+    });
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 }

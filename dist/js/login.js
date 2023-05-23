@@ -48,6 +48,9 @@ function loginPost() {
             var userDetails = await user.getUserDetails();
             userRole = userDetails.userLevel;
 
+            document.cookie = "userSn=" + userDetails.userSn;
+            document.cookie = "userRole=" + userRole;
+
             if (userRole == "ADMIN") {
                 location.href = "pages/admin-projects.html";
             } else {

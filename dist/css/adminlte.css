@@ -55720,5 +55720,9 @@ th {
   /* You may want to include this as bootstrap applies these styles too */
 }
 
+.hiddenField {
+  display: none;
+}
+
 
 /*# sourceMappingURL=adminlte.css.map */

@@ -96,16 +96,25 @@ function deleteCookies() {
 
   document.cookie = 'name=st; expires=' 
   + 'expires = Thu, 01 Jan 1970 00:00:00 GMT' 
-  + '; path=/; domain=' + location.host;
+  + '; path=/; domain=.negosys.co.kr';
 
   console.log(document.cookie);
-
-
 }
+
+function clearHOnlySessionCookie(name){
+  //var domain = domain || document.domain;
+  var path = "/";
+  document.cookie = name + "=null; path=" + path+";";
+
+};
 
 function logout() {
   //alert("sure logout?");
   deleteCookies();
+  clearHOnlySessionCookie("st");
+  clearHOnlySessionCookie("userRole");
+  clearHOnlySessionCookie("UserSn");
+  console.log(document.cookie);
   //location.href = "../login.html";
 }
 

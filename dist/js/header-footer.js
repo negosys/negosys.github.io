@@ -92,7 +92,14 @@ function deleteCookies() {
 
   for (var i = 0; i < allCookies.length; i++)
     document.cookie = allCookies[i] + "=;expires="
-      + new Date(0).toUTCString();
+      + 'expires = Thu, 01 Jan 1970 00:00:00 GMT';
+
+  document.cookie = 'name=st; expires=' 
+  + 'expires = Thu, 01 Jan 1970 00:00:00 GMT' 
+  + '; path=/; domain=' + location.host;
+
+  console.log(document.cookie);
+
 
 }
 

@@ -18,6 +18,4 @@ export async function getUserDetails() {
   } catch (error) {
     console.error(error);
   }
-
-
 }

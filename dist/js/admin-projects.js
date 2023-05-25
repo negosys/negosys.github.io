@@ -3,7 +3,7 @@ var userSn;
 $(document).ready(function () {
     var ck = getCookies("userRole");
     //console.log(ck);
-    if (ck == 'undefined' || ck == null) {
+    if (ck == 'undefined' || ck == 'null') {
         Swal.fire({
             text: "Sessioin expired. Please proceed to login.",
             type: "warning",

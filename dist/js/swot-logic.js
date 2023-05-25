@@ -391,25 +391,25 @@ function clearMeSide() {
         $(sid).html('');
         $(sid.concat("np")).html('');
         $(sid.concat("prior")).html('');
-        $(sid.concat("logic")).text('');
+        $(sid.concat("logic")).val('');
         $(sid.concat("logic")).addClass("hiddenField");
 
         $(wid).html('');
         $(wid.concat("np")).html('');
         $(wid.concat("prior")).html('');
-        $(wid.concat("logic")).text('');
+        $(wid.concat("logic")).val('');
         $(wid.concat("logic")).addClass("hiddenField");
 
         $(oid).html('');
         $(oid.concat("np")).html('');
         $(oid.concat("prior")).html('');
-        $(oid.concat("logic")).text('');
+        $(oid.concat("logic")).val('');
         $(oid.concat("logic")).addClass("hiddenField");
 
         $(tid).html('');
         $(tid.concat("np")).html('');
         $(tid.concat("prior")).html('');
-        $(tid.concat("logic")).text('');
+        $(tid.concat("logic")).val('');
         $(tid.concat("logic")).addClass("hiddenField");
     }
 }
@@ -424,25 +424,25 @@ function clearOtherSide() {
         $(sid).html('');
         $(sid.concat("np")).html('');
         $(sid.concat("prior")).html('');
-        $(sid.concat("logic")).text('');
+        $(sid.concat("logic")).val('');
         $(sid.concat("logic")).addClass("hiddenField");
 
         $(wid).html('');
         $(wid.concat("np")).html('');
         $(wid.concat("prior")).html('');
-        $(wid.concat("logic")).text('');
+        $(wid.concat("logic")).val('');
         $(wid.concat("logic")).addClass("hiddenField");
 
         $(oid).html('');
         $(oid.concat("np")).html('');
         $(oid.concat("prior")).html('');
-        $(oid.concat("logic")).text('');
+        $(oid.concat("logic")).val('');
         $(oid.concat("logic")).addClass("hiddenField");
 
         $(tid).html('');
         $(tid.concat("np")).html('');
         $(tid.concat("prior")).html('');
-        $(tid.concat("logic")).text('');
+        $(tid.concat("logic")).val('');
         $(tid.concat("logic")).addClass("hiddenField");
     }
 }

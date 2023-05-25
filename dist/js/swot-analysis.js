@@ -107,7 +107,7 @@ function loadSWOTList() {
             });
 
             issueLists = data;
-
+            console.log(data);
             $.each(data, function (index, itemData) {
                 if (index == 0) {
                     issueTitle += `

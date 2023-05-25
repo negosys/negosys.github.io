@@ -2,8 +2,31 @@
 
 
 $(document).ready(function () {
+    var ck = getCookies("userRole");
+    if (ck == 'undefined' || ck == 'null') {
+        Swal.fire({
+            text: "Sessioin expired. Please proceed to login.",
+            type: "warning",
+            //confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Ok',
+        }).then((result) => {
+            if (result.value) {
+                location.href = "../login.html"
+            }
+        });
+        return;
+    }
+
     loadProjectList();
 
+    function getCookies(cookieName) {
+        let cookie = {};
+        document.cookie.split(';').forEach(function (el) {
+            let [key, value] = el.split('=');
+            cookie[key.trim()] = value;
+        })
+        return cookie[cookieName];
+    }
 });
 
 document

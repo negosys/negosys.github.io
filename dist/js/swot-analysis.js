@@ -11,6 +11,21 @@ var issueSnList = [];
 var isSave = false;
 
 $(document).ready(async function () {
+    var ck = await user.getCookies("userRole");
+    if (ck == 'undefined' || ck == 'null') {
+        Swal.fire({
+            text: "Sessioin expired. Please proceed to login.",
+            type: "warning",
+            //confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Ok',
+        }).then((result) => {
+            if (result.value) {
+                location.href = "../login.html"
+            }
+        });
+        return;
+    }
+
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
@@ -85,7 +100,7 @@ function loadSWOTList() {
         ajaxUrl = "https://api.negosys.co.kr/nego/issuesByProjectSn"
         ajaxData = { projectSn: projectNo };
     }
-    
+
     $.ajax({
         url: ajaxUrl,
         type: "GET",
@@ -639,7 +654,7 @@ function refreshSWOTList() {
         ajaxUrl = "https://api.negosys.co.kr/nego/issuesByProjectSn"
         ajaxData = { projectSn: projectNo };
     }
-    
+
 
     $.ajax({
         url: ajaxUrl,

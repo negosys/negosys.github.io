@@ -11,10 +11,6 @@ function loginPost() {
     var username = document.getElementById('emailAdd').value;
     var password = document.getElementById('password').value;
 
-    //username = 'yuie@evonit.net';
-    //password = 'asdf!@34';
-    //console.log(username);
-
     if (username == '') {
         Swal.fire({
             icon: 'warning',
@@ -41,16 +37,15 @@ function loginPost() {
         data: { username: username, password: password },
         success: async function (data) {
             var x = JSON.stringify(data);
-            console.log(x);
-            let y = document.cookie;
-            console.log(y);
 
             var userDetails = await user.getUserDetails();
             userRole = userDetails.userLevel;
 
             document.cookie = "userSn=" + userDetails.userSn;
             document.cookie = "userRole=" + userRole;
-
+            
+            //console.log(document.cookie);
+            //alert("here");
             if (userRole == "ADMIN") {
                 location.href = "pages/admin-projects.html";
             } else {

@@ -129,7 +129,7 @@ function loadResultMakingList() {
                 issueSnList.push(issueSnMatch);
             });
 
-            console.log(issueSnList);
+            //console.log(issueSnList);
             $(".issueTitle").html(issueTitle);
             $(".totalIssue").html(totalIssueContent);
             $(".hookerContainer").html(hookerContent);
@@ -155,7 +155,7 @@ async function loadNextResult() {
     var nextId = parseInt(curId) + 1;
     var issueId;
 
-    console.log(totalIssues);
+    //console.log(totalIssues);
 
     var btnP = document.getElementById("btnPrevIssue");
     var btnN = document.getElementById("btnNextIssue");
@@ -265,7 +265,7 @@ async function loadPrevResult() {
     }
 
     $("#loadingView").show();
-
+    console.log(issueLists);
     $.each(issueLists, function (index, itemData) {
 
         var issueTitle = "";
@@ -680,7 +680,8 @@ function refreshResult() {
     $("#loadingView").show();
 
     $.ajax({
-        url: 'https://api.negosys.co.kr/a/issues',
+        url:
+            'https://api.negosys.co.kr/a/issues',
         type: "GET",
         data: { projectSn: projectNo, userSn: userNo },
         xhrFields: {
@@ -688,7 +689,8 @@ function refreshResult() {
         },
         crossDomain: true,
         success: function (data) {
-            $("#loadingView").show();
+
+            //console.log(JSON.stringify(data));
 
             //sort by issueSn
             data.sort(function (a, b) {

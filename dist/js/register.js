@@ -69,7 +69,7 @@ function registerPost() {
     console.log(reqObj);
 
     //return;
-
+    $("#loadingView").show();
     $.ajax({
         url:
             'https://api.negosys.co.kr/registerUser',
@@ -80,13 +80,13 @@ function registerPost() {
         crossDomain: true,
         data: JSON.stringify(reqObj),
         contentType: "application/json",
-        data: { userEmail: userEmail, userNm: fullName, userPw: password, userPhone: hpNo, userCompany: compName },
         success: function (data) {
             var x = JSON.stringify(data);
             console.log(x);
             location.href = "login.html";
         },
         error: function (error) {
+            var returnStatus = error.responseJSON.status;
             var x = JSON.stringify(error);
             console.log(x);
             Swal.fire({
@@ -94,6 +94,7 @@ function registerPost() {
                 title: 'Register Failed',
                 text: ''
             });
+            $("#loadingView").hide();
         }
     });
 }

@@ -179,7 +179,7 @@ function loadMeSide(item) {
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).text(itemData.logic);
+            $(id.concat("logic")).val(itemData.logic);
             console.log($(id.concat("logic")).val());
             $(id.concat("logic")).removeClass("hiddenField");
         }
@@ -192,7 +192,7 @@ function loadMeSide(item) {
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).text(itemData.logic);
+            $(id.concat("logic")).val(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
         }
 
@@ -205,7 +205,7 @@ function loadMeSide(item) {
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).text(itemData.logic);
+            $(id.concat("logic")).val(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
         }
 
@@ -218,7 +218,7 @@ function loadMeSide(item) {
             $(id).html(itemData.info);
             $(id.concat("np")).html(itemData.np);
             $(id.concat("prior")).html(itemData.priority);
-            $(id.concat("logic")).text(itemData.logic);
+            $(id.concat("logic")).val(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
         }
 
@@ -238,7 +238,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).text(itemData.logic);
+        $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -248,7 +248,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).text(itemData.logic);
+        $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -258,7 +258,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).text(itemData.logic);
+        $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -268,7 +268,7 @@ function loadOtherSide(item) {
         $(id).html(itemData.info);
         $(id.concat("np")).html(itemData.np);
         $(id.concat("prior")).html(itemData.priority);
-        $(id.concat("logic")).text(itemData.logic);
+        $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
     });
 
@@ -308,6 +308,7 @@ async function loadNextResult() {
         });
         return;
     }
+    console.log(issueId);
 
     clearMeSide();
     clearOtherSide();
@@ -369,6 +370,7 @@ async function loadPrevResult() {
         });
         return;
     }
+    console.log(issueId);
 
     clearMeSide();
     clearOtherSide();
@@ -493,7 +495,7 @@ async function saveSWOT(btnId) {
         var wid = "#meSwotW".concat(i);
         var oid = "#meSwotO".concat(i);
         var tid = "#meSwotT".concat(i);
-        //console.log($(sid).html());
+        console.log($(sid).html());
         if ($(sid).html().length > 0) {
             var newS = {
                 np: $(sid.concat("np")).html(),
@@ -623,7 +625,7 @@ async function saveSWOT(btnId) {
             var x = JSON.stringify(data);
             //console.log(x);
 
-            //refreshSWOTList();
+            refreshSWOTList();
 
             if (btnId == "save") {
                 Swal.fire({
@@ -647,4 +649,50 @@ async function saveSWOT(btnId) {
         }
     });
 
+}
+
+function refreshSWOTList() {
+    $("#loadingView").show();
+
+    var ajaxUrl;
+    var ajaxData;
+
+    if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issues";
+        ajaxData = { projectSn: projectNo, userSn: userNo };
+    } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issuesByProjectSn"
+        ajaxData = { projectSn: projectNo };
+    }
+
+
+    $.ajax({
+        url: ajaxUrl,
+        type: "GET",
+        data: ajaxData,
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        success: function (data) {
+            $("#loadingView").show();
+
+            //sort by issueSn
+            data.sort(function (a, b) {
+                return a.issueSn - b.issueSn;
+            });
+
+            issueLists = data;
+
+            $("#loadingView").hide();
+        },
+        error: function (error) {
+            $("#loadingView").hide();
+            console.log(JSON.stringify(error));
+            Swal.fire({
+                icon: 'error',
+                text: 'Failed to load issue data.'
+            });
+        }
+    });
 }

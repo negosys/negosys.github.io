@@ -651,6 +651,8 @@ async function saveList(btnId) {
         contentType: "application/json",
         success: function (data) {
 
+            refreshResult();
+
             if (btnId == "save") {
                 Swal.fire({
                     icon: 'info',
@@ -672,4 +674,38 @@ async function saveList(btnId) {
         }
     });
 
+}
+
+function refreshResult() {
+    $("#loadingView").show();
+
+    $.ajax({
+        url: 'https://api.negosys.co.kr/a/issues',
+        type: "GET",
+        data: { projectSn: projectNo, userSn: userNo },
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        success: function (data) {
+            $("#loadingView").show();
+
+            //sort by issueSn
+            data.sort(function (a, b) {
+                return a.issueSn - b.issueSn;
+            });
+
+            issueLists = data;
+
+            $("#loadingView").hide();
+        },
+        error: function (error) {
+            $("#loadingView").hide();
+            console.log(JSON.stringify(error));
+            Swal.fire({
+                icon: 'error',
+                text: 'Failed to load issue data.'
+            });
+        }
+    });
 }

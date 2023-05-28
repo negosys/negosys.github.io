@@ -1,10 +1,17 @@
+import * as user from "./adminlte.js"
+
+var userRole;
+
 var projectNo = "";
 var currentIssue = "";
 var totalIssues = "";
 var issueLists;
 var issueSnList = [];
 
-$(document).ready(function () {
+$(document).ready(async function () {
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
+
     var ck = getCookies("userRole");
     if (ck == 'undefined' || ck == 'null') {
         Swal.fire({

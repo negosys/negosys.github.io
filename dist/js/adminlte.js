@@ -16,6 +16,22 @@ export async function getUserDetails() {
 
     return result;
   } catch (error) {
+    console.log(error);
+    var returnStatus = error.status;
+
+    if (returnStatus == "401") {
+      Swal.fire({
+        text: "Sessioin expired. Please proceed to login.",
+        type: "warning",
+        //confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Ok',
+      }).then((result) => {
+        if (result.value) {
+          location.href = "../login.html"
+        }
+      });
+      //location.href = "../login.html"
+    }
     console.error(error);
   }
 }

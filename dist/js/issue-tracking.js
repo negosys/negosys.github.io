@@ -10,6 +10,9 @@ var isSave = false;
 
 
 $(document).ready(async function () {
+  var userDetails = await user.getUserDetails();
+  userRole = userDetails.userLevel;
+  
   var ck = await user.getCookies("userRole");
   if (ck == 'undefined' || ck == 'null') {
     console.log('here');
@@ -39,9 +42,6 @@ $(document).ready(async function () {
     return;
   }
 
-  var userDetails = await user.getUserDetails();
-  userRole = userDetails.userLevel;
-
   await loadTrackingList();
 });
 
@@ -54,18 +54,28 @@ async function loadTrackingList() {
 
   await loadIssueDetails().then(result => {
     if (result) {
+      var ajaxUrl;
+      var ajaxData;
+
+      if (userRole == "ADMIN") {
+        ajaxUrl = "https://api.negosys.co.kr/a/issueTrackingsByProjectSn";
+        ajaxData = { projectSn: projectNo, userSn: userNo };
+      } else {
+        ajaxUrl = "https://api.negosys.co.kr/nego/issueTrackingsByProjectSn"
+        ajaxData = { projectSn: projectNo };
+      }
+
       $.ajax({
-        url:
-          'https://api.negosys.co.kr/nego/issueTrackingsByProjectSn',
+        url: ajaxUrl,
         type: "GET",
-        data: { projectSn: projectNo },
+        data: ajaxData,
         xhrFields: {
           withCredentials: true
         },
         crossDomain: true,
         success: function (data) {
           var html = "";
-
+          console.log(data);
           //sort by issueSn
           data.sort(function (a, b) {
             return a.issueSn - b.issueSn;
@@ -187,15 +197,15 @@ async function loadTrackingList() {
                             <tr>
                               <td class="tg-0lax" rowspan="3">
                                 Weight
-                                <input id="issueWeight" type="number" class="form-control allow_numeric table-input" placeholder="eg. 0.8" value="${itemData.issueWeight}">
+                                <input id="issueWeight" type="number" step="0.1" min="0" max="1" class="form-control allow_numeric table-input" placeholder="eg. 0.8" value="${itemData.issueWeight}">
                               </td>
                               <td class="tg-0lax" rowspan="2">Min.</td>
         
                               <td class="tg-0lax" rowspan="2">
-                                <input id="meMin1" type="number" class="form-control allow_numeric table-input" value="${meTop1}">
+                                <input id="meMin1" type="number" class="form-control allow_numeric table-input" value="${meBottom1}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="otherMin1" type="number" class="form-control allow_numeric table-input" value="${otherTop1}">
+                                <input id="otherMin1" type="number" class="form-control allow_numeric table-input" value="${otherBottom1}">
                               </td>
                               <td class="tg-0lax" rowspan="6">
                                 <input id="meResult1" type="number" class="form-control allow_numeric td-col6 table-input" value="${meResult1}">
@@ -205,10 +215,10 @@ async function loadTrackingList() {
                               </td>
         
                               <td class="tg-0lax" rowspan="2">
-                                <input id="meMin2" type="number" class="form-control allow_numeric table-input" value="${meTop2}">
+                                <input id="meMin2" type="number" class="form-control allow_numeric table-input" value="${meBottom2}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="otherMin2" type="number" class="form-control allow_numeric table-input" value="${otherTop2}">
+                                <input id="otherMin2" type="number" class="form-control allow_numeric table-input" value="${otherBottom2}">
                               </td>
                               <td class="tg-0lax" rowspan="6">
                                 <input id="meResult2" type="number" class="form-control allow_numeric td-col6 table-input" value="${meResult2}">
@@ -218,10 +228,10 @@ async function loadTrackingList() {
                               </td>
         
                               <td class="tg-0lax" rowspan="2">
-                                <input id="meMin3" type="number" class="form-control allow_numeric table-input" value="${meTop3}">
+                                <input id="meMin3" type="number" class="form-control allow_numeric table-input" value="${meBottom3}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="otherMin3" type="number" class="form-control allow_numeric table-input" value="${otherTop3}">
+                                <input id="otherMin3" type="number" class="form-control allow_numeric table-input" value="${otherBottom3}">
                               </td>
                               <td class="tg-0lax" rowspan="6">
                                 <input id="meResult3" type="number" class="form-control allow_numeric td-col6 table-input" value="${meResult3}">
@@ -231,10 +241,10 @@ async function loadTrackingList() {
                               </td>
         
                               <td class="tg-0lax" rowspan="6">
-                                <textarea id="result" type="text" class="form-control table-input" rows="6"></textarea>
+                                <textarea id="result" type="text" class="form-control table-input" rows="6">${itemData.resultStr}</textarea>
                               </td>
                               <td class="tg-0lax" rowspan="6">
-                                <textarea id="option" type="text" class="form-control table-input" rows="6"></textarea>
+                                <textarea id="option" type="text" class="form-control table-input" rows="6">${itemData.optionStr}</textarea>
                               </td>
                             </tr>
                             <tr>
@@ -269,22 +279,22 @@ async function loadTrackingList() {
                             <tr>
                               <td class="tg-0lax" rowspan="2">Max.</td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="meMax1" type="number" class="form-control allow_numeric table-input" value="${meBottom1}">
+                                <input id="meMax1" type="number" class="form-control allow_numeric table-input" value="${meTop1}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="otherMax1" type="number" class="form-control allow_numeric table-input" value="${otherBottom1}">
+                                <input id="otherMax1" type="number" class="form-control allow_numeric table-input" value="${otherTop1}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="meMax2" type="number" class="form-control allow_numeric table-input" value="${meBottom2}">
+                                <input id="meMax2" type="number" class="form-control allow_numeric table-input" value="${meTop2}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="otherMax2" type="number" class="form-control allow_numeric table-input" value="${otherBottom2}">
+                                <input id="otherMax2" type="number" class="form-control allow_numeric table-input" value="${otherTop2}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="meMax3" type="number" class="form-control allow_numeric table-input" value="${meBottom3}">
+                                <input id="meMax3" type="number" class="form-control allow_numeric table-input" value="${meTop3}">
                               </td>
                               <td class="tg-0lax" rowspan="2">
-                                <input id="otherMax3" type="number" class="form-control allow_numeric table-input" value="${otherBottom3}">
+                                <input id="otherMax3" type="number" class="form-control allow_numeric table-input" value="${otherTop3}">
                               </td>
                             </tr>
                             <tr>
@@ -328,17 +338,23 @@ $(".allow_numeric").on("input", function (evt) {
 function saveIssueTracking() {
   var issueId;
 
+  if (checkWeightTotal() == false) {
+    return;
+  }
+
   for (let i = 0; i < issueSnList.length; i++) {
 
     var trackingHistoryList = [];
-    var eStandardList = [];
 
     var tableId = "#tblData".concat(issueSnList[i]);
     var inputs = $(tableId).find("input");
+    var inputsTextarea = $(tableId).find("textarea");
     //console.log(inputs);
 
     var issueUnit;
     var issueWeight;
+    var resultString;
+    var optionString;
 
     $.each(inputs, function (index, item) {
       if (this.id == "issueUnit") {
@@ -346,6 +362,16 @@ function saveIssueTracking() {
       }
       if (this.id == "issueWeight") {
         issueWeight = this.value;
+      }
+    });
+
+    $.each(inputsTextarea, function (index, item) {
+      console.log(this.id);
+      if (this.id == "result") {
+        resultString = this.value;
+      }
+      if (this.id == "option") {
+        optionString = this.value;
       }
     });
 
@@ -389,13 +415,13 @@ function saveIssueTracking() {
       });
 
       var trackingItem = {
-        meTop: meMin,
+        meTop: meMax,
         meMiddle: meAvg,
-        meBottom: meMax,
+        meBottom: meMin,
         meResult: meResult,
-        otherTop: otherMin,
+        otherTop: otherMax,
         otherMiddle: otherAvg,
-        otherBottom: otherMax,
+        otherBottom: otherMin,
         otherResult: otherResult
       };
 
@@ -406,14 +432,15 @@ function saveIssueTracking() {
       issueSn: issueSnList[i],
       issueUnit: issueUnit,
       issueWeight: issueWeight,
-      evaluationStandardList: eStandardList,
-      evaluationScore: issueId,
-      trackingHistory: trackingHistoryList
+      trackingHistory: trackingHistoryList,
+      resultStr: resultString,
+      optionStr: optionString,
+      evaluationScore: 0
     }
 
     console.log(reqObj);
 
-    return;
+    //return;
 
     $("#loadingView").show();
 
@@ -506,4 +533,29 @@ async function loadIssueDetails() {
   });
 
 
+}
+
+function checkWeightTotal() {
+  var totalWeight = 0;
+
+  for (let i = 0; i < issueSnList.length; i++) {
+    var tableId = "#tblData".concat(issueSnList[i]);
+    var inputs = $(tableId).find("input");
+
+    $.each(inputs, function (index, item) {
+      if (this.id == "issueWeight") {
+        totalWeight = parseFloat(totalWeight) + parseFloat(this.value);
+      }
+    });
+  }
+
+  if (totalWeight != 1.0) {
+    Swal.fire({
+      icon: 'warning',
+      text: 'Total weight issues must be equal to 1.0.'
+    });
+    return false;
+  }
+
+  return true;
 }

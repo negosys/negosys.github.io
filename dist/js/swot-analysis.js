@@ -464,6 +464,9 @@ function initialDropdownBox() {
 }
 
 async function saveSWOT(btnId) {
+    removeEmptyClass();
+    if (checkEmptyAll()) return;
+
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var issueId;
@@ -685,4 +688,311 @@ function refreshSWOTList() {
             });
         }
     });
+}
+
+function checkEmptyAll() {
+    var isEmpty = false;
+
+    for (let i = 1; i <= 3; i++) {
+
+        //me
+        var sid = "#meSwotS".concat(i);
+        var wid = "#meSwotW".concat(i);
+        var oid = "#meSwotO".concat(i);
+        var tid = "#meSwotT".concat(i);
+
+        if ($(sid).val().length == 0) {
+            $(sid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(sid.concat("np")).val() == null) {
+            $(sid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+        if ($(sid.concat("prior")).val() == null) {
+            $(sid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(wid).val().length == 0) {
+            $(wid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(wid.concat("np")).val() == null) {
+            $(wid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(wid.concat("prior")).val() == null) {
+            $(wid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(oid).val().length == 0) {
+            $(oid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(oid.concat("np")).val() == null) {
+            $(oid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(oid.concat("prior")).val() == null) {
+            $(oid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(tid).val().length == 0) {
+            $(tid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(tid.concat("np")).val() == null) {
+            $(tid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+        if ($(tid.concat("prior")).val() == null) {
+            $(tid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+
+
+        //other
+        sid = "#otherSwotS".concat(i);
+        wid = "#otherSwotW".concat(i);
+        oid = "#otherSwotO".concat(i);
+        tid = "#otherSwotT".concat(i);
+
+        if ($(sid).val().length == 0) {
+            $(sid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(sid.concat("np")).val() == null) {
+            $(sid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+        if ($(sid.concat("prior")).val() == null) {
+            $(sid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(wid).val().length == 0) {
+            $(wid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(wid.concat("np")).val() == null) {
+            $(wid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(wid.concat("prior")).val() == null) {
+            $(wid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(oid).val().length == 0) {
+            $(oid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(oid.concat("np")).val() == null) {
+            $(oid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(oid.concat("prior")).val() == null) {
+            $(oid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(tid).val().length == 0) {
+            $(tid).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(tid.concat("np")).val() == null) {
+            $(tid.concat("np")).addClass("warningField");
+            isEmpty = true;
+        }
+        if ($(tid.concat("prior")).val() == null) {
+            $(tid.concat("prior")).addClass("warningField");
+            isEmpty = true;
+        }
+    }
+
+    if (isEmpty) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'Not allow empty.'
+        });
+        return true;
+    }
+    return false;
+}
+
+function removeEmptyClass() {
+    for (let i = 1; i <= 3; i++) {
+
+        //me
+        var sid = "#meSwotS".concat(i);
+        var wid = "#meSwotW".concat(i);
+        var oid = "#meSwotO".concat(i);
+        var tid = "#meSwotT".concat(i);
+
+        $(sid.concat("np")).removeClass("warningField");
+        $(sid.concat("prior")).removeClass("warningField");
+
+        $(wid.concat("np")).removeClass("warningField");
+        $(wid.concat("prior")).removeClass("warningField");
+
+        $(oid.concat("np")).removeClass("warningField");
+        $(oid.concat("prior")).removeClass("warningField");
+
+        $(tid.concat("np")).removeClass("warningField");
+        $(tid.concat("prior")).removeClass("warningField");
+
+
+        //other
+        sid = "#otherSwotS".concat(i);
+        wid = "#otherSwotW".concat(i);
+        oid = "#otherSwotO".concat(i);
+        tid = "#otherSwotT".concat(i);
+
+        $(sid.concat("np")).removeClass("warningField");
+        $(sid.concat("prior")).removeClass("warningField");
+
+        $(wid.concat("np")).removeClass("warningField");
+        $(wid.concat("prior")).removeClass("warningField");
+
+        $(oid.concat("np")).removeClass("warningField");
+        $(oid.concat("prior")).removeClass("warningField");
+
+        $(tid.concat("np")).removeClass("warningField");
+        $(tid.concat("prior")).removeClass("warningField");
+    }
+}
+
+function checkEmpty() {
+    var isEmpty = false;
+
+    for (let i = 1; i <= 3; i++) {
+
+        //me
+        var sid = "#meSwotS".concat(i);
+        var wid = "#meSwotW".concat(i);
+        var oid = "#meSwotO".concat(i);
+        var tid = "#meSwotT".concat(i);
+
+        if ($(sid).val().length > 0) {
+            //console.log($(sid.concat("np")).val());
+            if ($(sid.concat("np")).val() == null) {
+                $(sid.concat("np")).addClass("warningField");
+                isEmpty = true;
+                //break;
+            }
+            if ($(sid.concat("prior")).val() == null) {
+                $(sid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+
+        if ($(wid).val().length > 0) {
+            if ($(wid.concat("np")).val() == null) {
+                $(wid.concat("np")).addClass("warningField");
+                isEmpty = true;
+            }
+            if ($(wid.concat("prior")).val() == null) {
+                $(wid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+
+        if ($(oid).val().length > 0) {
+            if ($(oid.concat("np")).val() == null) {
+                $(oid.concat("np")).addClass("warningField");
+                isEmpty = true;
+            }
+            if ($(oid.concat("prior")).val() == null) {
+                $(oid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+
+        if ($(tid).val().length > 0) {
+            if ($(tid.concat("np")).val() == null) {
+                $(tid.concat("np")).addClass("warningField");
+                isEmpty = true;
+            }
+            if ($(tid.concat("prior")).val() == null) {
+                $(tid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+
+        //other
+        sid = "#otherSwotS".concat(i);
+        wid = "#otherSwotW".concat(i);
+        oid = "#otherSwotO".concat(i);
+        tid = "#otherSwotT".concat(i);
+
+        if ($(sid).val().length > 0) {
+            //console.log($(sid.concat("np")).val());
+            if ($(sid.concat("np")).val() == null) {
+                $(sid.concat("np")).addClass("warningField");
+                isEmpty = true;
+                //break;
+            }
+            if ($(sid.concat("prior")).val() == null) {
+                $(sid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+
+        if ($(wid).val().length > 0) {
+            if ($(wid.concat("np")).val() == null) {
+                $(wid.concat("np")).addClass("warningField");
+                isEmpty = true;
+            }
+            if ($(wid.concat("prior")).val() == null) {
+                $(wid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+
+        if ($(oid).val().length > 0) {
+            if ($(oid.concat("np")).val() == null) {
+                $(oid.concat("np")).addClass("warningField");
+                isEmpty = true;
+            }
+            if ($(oid.concat("prior")).val() == null) {
+                $(oid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+
+        if ($(tid).val().length > 0) {
+            if ($(tid.concat("np")).val() == null) {
+                $(tid.concat("np")).addClass("warningField");
+                isEmpty = true;
+            }
+            if ($(tid.concat("prior")).val() == null) {
+                $(tid.concat("prior")).addClass("warningField");
+                isEmpty = true;
+            }
+        }
+    }
+
+    if (isEmpty) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'Not allow empty.'
+        });
+        return true;
+    }
+    return false;
 }

@@ -465,6 +465,9 @@ function clearOtherSide() {
 }
 
 async function saveSWOT(btnId) {
+    removeEmptyClass();
+    if (checkEmpty()) return;
+
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var issueId;
@@ -695,4 +698,104 @@ function refreshSWOTList() {
             });
         }
     });
+}
+
+function checkEmpty(){
+    var isEmpty = false;
+
+    for (let i = 1; i <= 3; i++) {
+
+        //me
+        var sid = "#meSwotS".concat(i);
+        var wid = "#meSwotW".concat(i);
+        var oid = "#meSwotO".concat(i);
+        var tid = "#meSwotT".concat(i);
+
+        if ($(sid.concat("logic")).val().length == 0) {
+            $(sid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(wid.concat("logic")).val().length == 0) {
+            $(wid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+
+
+        if ($(oid.concat("logic")).val().length == 0) {
+            $(oid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(tid.concat("logic")).val().length == 0) {
+            $(tid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+
+
+        //other
+        sid = "#otherSwotS".concat(i);
+        wid = "#otherSwotW".concat(i);
+        oid = "#otherSwotO".concat(i);
+        tid = "#otherSwotT".concat(i);
+
+        if ($(sid.concat("logic")).val().length == 0) {
+            $(sid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+
+
+        if ($(wid.concat("logic")).val().length == 0) {
+            $(wid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+
+
+        if ($(oid.concat("logic")).val().length == 0) {
+            $(oid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+
+        if ($(tid.concat("logic")).val().length == 0) {
+            $(tid.concat("logic")).addClass("warningField");
+            isEmpty = true;
+        }
+    }
+
+    if (isEmpty) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'Not allow empty.'
+        });
+        return true;
+    }
+    return false;
+}
+
+function removeEmptyClass(){
+    for (let i = 1; i <= 3; i++) {
+
+        //me
+        var sid = "#meSwotS".concat(i);
+        var wid = "#meSwotW".concat(i);
+        var oid = "#meSwotO".concat(i);
+        var tid = "#meSwotT".concat(i);
+
+        $(sid.concat("logic")).removeClass("warningField");
+        $(wid.concat("logic")).removeClass("warningField");
+        $(oid.concat("logic")).removeClass("warningField");
+        $(tid.concat("logic")).removeClass("warningField");
+
+
+        //other
+        sid = "#otherSwotS".concat(i);
+        wid = "#otherSwotW".concat(i);
+        oid = "#otherSwotO".concat(i);
+        tid = "#otherSwotT".concat(i);
+
+        $(sid.concat("logic")).removeClass("warningField");
+        $(wid.concat("logic")).removeClass("warningField");
+        $(oid.concat("logic")).removeClass("warningField");
+        $(tid.concat("logic")).removeClass("warningField");
+    }
 }

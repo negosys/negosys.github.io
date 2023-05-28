@@ -11,6 +11,9 @@ var issueLists;
 var isSave = false;
 
 $(document).ready(async function () {
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
+
     var ck = await user.getCookies("userRole");
     if (ck == 'undefined' || ck == 'null') {
         Swal.fire({
@@ -38,10 +41,7 @@ $(document).ready(async function () {
         });
         return;
     }
-
-    var userDetails = await user.getUserDetails();
-    userRole = userDetails.userLevel;
-
+    
     loadProjectIssueList();
 });
 
@@ -304,9 +304,9 @@ async function loadProjectIssueList() {
                     meOrder = 1;
                 }
 
-                let reasonVal = "";
-                if (itemData.meReason != 'null') {
-                    reasonVal = itemData.meReason;
+                let reasonVal = itemData.meReason;
+                if (itemData.meReason == null) {
+                    reasonVal = "";
                 }
 
                 mePriorHtml += `
@@ -343,9 +343,9 @@ async function loadProjectIssueList() {
                     otherOrder = 1;
                 }
 
-                let reasonVal = "";
-                if (itemData.otherReason != 'null') {
-                    reasonVal = itemData.otherReason;
+                let reasonVal = itemData.otherReason;
+                if (itemData.otherReason == null) {
+                    reasonVal = "";
                 }
 
                 otherPriorHtml += `

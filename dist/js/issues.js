@@ -7,6 +7,9 @@ var projectNo = "";
 var curIssuesNo = "";
 
 $(document).ready(async function () {
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
+    
     var ck = await user.getCookies("userRole");
     if (ck == 'undefined' || ck == 'null') {
         Swal.fire({
@@ -21,7 +24,7 @@ $(document).ready(async function () {
         });
         return;
     }
-    
+
     loadIssueKind();
 
     var queryString = window.location.search;
@@ -38,9 +41,6 @@ $(document).ready(async function () {
         });
         return;
     }
-    
-    var userDetails = await user.getUserDetails();
-    userRole = userDetails.userLevel;
 
 
     loadProjectIssueList();
@@ -71,7 +71,7 @@ function nextPage() {
     }
     if (userRole == "ADMIN") {
         location.href = "prior-issues.html?projectSn=" + projectNo + "&userSn=" + userNo;
-    }else{
+    } else {
         location.href = "prior-issues.html?projectSn=" + projectNo;
     }
 }
@@ -226,7 +226,7 @@ function addIssue() {
     var issueKind = $("#ddlIssueKind").val();
     var issue = $("#ddlIssue").val();
 
-    console.log($("#ddlIssue option:selected").index());
+    //console.log($("#ddlIssue option:selected").index());
 
     if (issueKind == "" || issueKind == "0") {
         Swal.fire({
@@ -241,6 +241,34 @@ function addIssue() {
         });
         return;
     }
+
+    //check duplicate issue
+    var table = $('#tblData').DataTable();
+    var filteredIssueKind = table
+        .column(0)
+        .data()
+        .filter(function (value, index) {
+            return value == issueKind ? true : false;
+        });
+    var filteredIssue = table
+        .column(1)
+        .data()
+        .filter(function (value, index) {
+            return value == issue ? true : false;
+        });
+    //console.log(filteredIssueKind.length);
+
+    if (filteredIssueKind.length > 0) {
+        if (filteredIssue.length > 0) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Issue duplicated.'
+            });
+            return;
+        }
+    }
+
+    //return;
 
     let reqObj = { projectSn: projectNo, issueKind: issueKind, issue: issue }
 

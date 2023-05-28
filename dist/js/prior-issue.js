@@ -304,6 +304,10 @@ async function loadProjectIssueList() {
                     meOrder = 1;
                 }
 
+                let reasonVal = "";
+                if (itemData.meReason != 'null') {
+                    reasonVal = itemData.meReason;
+                }
 
                 mePriorHtml += `
                 <div class="small-box prior">
@@ -317,7 +321,7 @@ async function loadProjectIssueList() {
                 <div class="small-box draggable medraggable" draggable="true">
                         <div class="inner">
                           <p class="ml-2">${itemData.issueKind} > ${itemData.issue}</p>
-                          <textarea id-data="${itemData.issueSn}" class="form-control meReason" placeholder="Enter reason" maxlength="256">${itemData.meReason}</textarea>
+                          <textarea id-data="${itemData.issueSn}" class="form-control meReason" placeholder="Enter reason" maxlength="256">${reasonVal}</textarea>
                         </div>
                       </div>
                 `;
@@ -339,6 +343,11 @@ async function loadProjectIssueList() {
                     otherOrder = 1;
                 }
 
+                let reasonVal = "";
+                if (itemData.otherReason != 'null') {
+                    reasonVal = itemData.otherReason;
+                }
+
                 otherPriorHtml += `
                 <div class="small-box prior">
                 <div class="inner text-center">
@@ -351,7 +360,7 @@ async function loadProjectIssueList() {
                 <div class="small-box draggable otherdraggable" draggable="true">
                         <div class="inner">
                           <p class="ml-2">${itemData.issueKind} > ${itemData.issue}</p>
-                          <textarea id-data="${itemData.issueSn}" class="form-control otherReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${itemData.otherReason}</textarea>
+                          <textarea id-data="${itemData.issueSn}" class="form-control otherReason-${itemData.issueSn}" placeholder="Enter reason" maxlength="256">${reasonVal}</textarea>
                         </div>
                       </div>
                 `;

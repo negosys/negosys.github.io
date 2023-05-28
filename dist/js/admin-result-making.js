@@ -264,7 +264,7 @@ async function loadPrevResult() {
     await saveList();
 
     if (isSave == false) return;
-    
+
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var prevId = parseInt(curId) - 1;
@@ -608,6 +608,8 @@ $("#btnAddHooker").click(function () {
 });
 
 async function saveList(btnId) {
+    isSave = false;
+    
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var issueId;

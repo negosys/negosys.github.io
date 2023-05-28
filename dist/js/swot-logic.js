@@ -469,6 +469,8 @@ function clearOtherSide() {
 }
 
 async function saveSWOT(btnId) {
+    isSave = false;
+    
     removeEmptyClass();
     if (checkEmpty()) return;
 

@@ -245,6 +245,8 @@ async function loadNextResult() {
     //save data before load another issue
     await saveSWOT();
 
+    if (isSave == false) return;
+
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var nextId = parseInt(curId) + 1;
@@ -305,6 +307,8 @@ async function loadNextResult() {
 async function loadPrevResult() {
     //save data before load another issue
     await saveSWOT();
+
+    if (isSave == false) return;
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);

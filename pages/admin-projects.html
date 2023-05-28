@@ -18,6 +18,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.css">
   <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
   <style>
     div.action-buttons {
@@ -31,6 +32,15 @@
       margin-left: 5px;
     }
 
+    #btnSearchCustomer {
+      position: absolute;
+      top: 12%;
+    }
+
+    .select2-container .select2-selection--single {
+      height: 38px !important;
+      border-color: #5D66DF;
+    }
   </style>
 </head>
 
@@ -51,7 +61,7 @@
               <h1 class="ml-2">Select Customer project</h1>
             </div>
             <div class="col-sm-6">
-              
+
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -64,11 +74,25 @@
           <div class="row">
             <div class="col-6 col-sm-4">
               <div class="form-group">
-                <label>Select Customer:</label>
-                <select id="ddlCustomerList" class="form-control select2" data-dropdown-css-class="select2-purple"
-                  style="width: 100%;">
-                </select>
-  
+                <label>Customer:</label>
+                <input id="filterCustomer" type="text" class="form-control" placeholder="Enter at least 3 characters">
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 mt-4">
+              <button id="btnSearchCustomer" type="button" class="btn themeColor"><i class="fa fa-search"></i>
+                Search</button>
+            </div>
+          </div>
+
+          <div class="row divCustomerList hiddenField">
+            <div class="col-6 col-sm-4">
+              <div class="form-group">
+                <label>Select Customer</label>
+                <div class="select2-purple">
+                  <select id="ddlCustomerList" class="form-control select2"
+                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -105,14 +129,15 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    
+
     <div class="footerContainer"></div>
-    
+
   </div>
   <!-- ./wrapper -->
 
   <script src="../plugins/jquery/jquery.min.js"></script>
   <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../plugins/select2/js/select2.full.min.js"></script>
   <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
   <script src="../plugins/moment/moment.min.js"></script>
 
@@ -124,6 +149,21 @@
 
   <script type="module" src="../dist/js/admin-projects.js"></script>
   <script src="../dist/js/header-footer.js"></script>
+
+  <!-- Page specific script -->
+  <script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    })
+
+
+  </script>
 </body>
 
 </html>

@@ -2,6 +2,20 @@ import * as user from "./adminlte.js"
 
 var userRole;
 
+$(document).ready(async function () {
+    /* var ck = await user.getCookies("userRole");
+    if (ck != 'undefined' || ck != 'null') {
+        var userDetails = await user.getUserDetails();
+        userRole = userDetails.userLevel;
+
+        if (userRole == "ADMIN") {
+            location.href = "pages/admin-projects.html";
+        } else {
+            location.href = "pages/projects.html";
+        }
+    } */
+});
+
 document
     .getElementById("btnLogin")
     .addEventListener("click", loginPost);
@@ -41,9 +55,9 @@ function loginPost() {
             var userDetails = await user.getUserDetails();
             userRole = userDetails.userLevel;
 
-            document.cookie = "userSn=" + userDetails.userSn;
-            document.cookie = "userRole=" + userRole;
-            
+            document.cookie = "userSn=" + userDetails.userSn + "; max-age=3600; path=/";
+            document.cookie = "userRole=" + userRole + "; max-age=3600; path=/";
+
             //console.log(document.cookie);
             //alert("here");
             if (userRole == "ADMIN") {
@@ -54,6 +68,7 @@ function loginPost() {
 
         },
         error: function (error) {
+            var returnStatus = error.responseJSON.status;
             console.log(JSON.stringify(error));
             Swal.fire({
                 icon: 'error',

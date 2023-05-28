@@ -1,6 +1,13 @@
-var userSn;
+import * as user from "./adminlte.js"
 
-$(document).ready(function () {
+var userRole;
+var userNo = 0;
+
+$(document).ready(async function () {
+
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
+
     var ck = getCookies("userRole");
     //console.log(ck);
     if (ck == 'undefined' || ck == 'null') {
@@ -17,9 +24,6 @@ $(document).ready(function () {
         return;
     }
 
-    //loadCustomerList();
-    loadProjectList();
-
     function getCookies(cookieName) {
         let cookie = {};
         document.cookie.split(';').forEach(function (el) {
@@ -30,18 +34,22 @@ $(document).ready(function () {
     }
 });
 
+document
+    .getElementById("btnSearchCustomer")
+    .addEventListener("click", loadCustomerList);
+
 
 $('#ddlCustomerList').on('select2:select', function (e) {
-    var selectedIssueKind = e.params.data.id;
-    loadProjectList();
+    var selectedCustomer = $("#ddlCustomerList").val();
+    if (selectedCustomer != 0) {
+        loadProjectList(selectedCustomer);
+        $("#loadingView").hide();
+    }
 });
 
-function loadProjectList() {
+function loadProjectList(userSn) {
     userSn = $("#ddlCustomerList").val();
 
-    //temp
-    userSn = 1;
-    console.log(userSn);
     if (userSn == "") {
         Swal.fire({
             icon: 'warning',
@@ -50,6 +58,7 @@ function loadProjectList() {
         return;
     }
 
+    $("#loadingView").show();
     var dataTable = $('#tblData').DataTable({
         paging: true,
         destroy: true,
@@ -101,27 +110,39 @@ function loadProjectList() {
 }
 
 function loadCustomerList() {
+    var filterCust = $("#filterCustomer").val();
+    if (filterCust.length < 3) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'At least 3 characters to load customer list.'
+        });
+        return;
+    }
+
     $.ajax({
         url:
             'https://api.negosys.co.kr/a/users',
         type: "GET",
+        data: { name: filterCust },
         xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
         success: function (data) {
-            var issueKind = $("#ddlCustomerList");
-            issueKind.empty();
-            issueKind.append($('<option/>', {
+            //console.log(data);
+            var ddl = $("#ddlCustomerList");
+            ddl.empty();
+            ddl.append($('<option/>', {
                 value: 0,
                 text: "-Select Customer"
             }));
             $.each(data, function (index, itemData) {
-                issueKind.append($('<option/>', {
-                    value: itemData.issueKind,
-                    text: itemData.issueKind
+                ddl.append($('<option/>', {
+                    value: itemData.userSn,
+                    text: itemData.userNm
                 }));
             });
+            $(".divCustomerList").removeClass("hiddenField");
         },
         error: function (error) {
             console.log(JSON.stringify(error));

@@ -11,6 +11,9 @@ var issueSnList = [];
 var isSave = false;
 
 $(document).ready(async function () {
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
+
     var ck = await user.getCookies("userRole");
     if (ck == 'undefined' || ck == 'null') {
         Swal.fire({
@@ -25,7 +28,7 @@ $(document).ready(async function () {
         });
         return;
     }
-    
+
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
@@ -38,9 +41,6 @@ $(document).ready(async function () {
         });
         return;
     }
-
-    var userDetails = await user.getUserDetails();
-    userRole = userDetails.userLevel;
 
     loadResultMakingList();
 });
@@ -58,6 +58,18 @@ document
     .addEventListener("click", function () {
         saveList('save');
     });
+
+$(".hookerContainer").on("click", '.btn-danger', function (event) {
+    event.preventDefault();
+    var removeDiv = event.currentTarget.offsetParent;
+    removeDiv.remove();
+});
+
+$(".watnaContainer").on("click", '.btn-danger', function (event) {
+    event.preventDefault();
+    var removeDiv = event.currentTarget.offsetParent;
+    removeDiv.remove();
+});
 
 function loadResultMakingList() {
     $("#loadingView").show();
@@ -106,7 +118,15 @@ function loadResultMakingList() {
                         // Trim the excess whitespace.
                         hookerList[i] = hookerList[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                        hookerContent += `<p>${hookerList[i]}</p>`;
+                        //hookerContent += `<p>${hookerList[i]}</p>`;
+                        hookerContent += `
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="${hookerList[i]}">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </span>
+                        </div>
+                        `;
                     }
 
                     var watnaList = itemData.watna;
@@ -115,7 +135,15 @@ function loadResultMakingList() {
                         // Trim the excess whitespace.
                         watnaList[i] = watnaList[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                        watnaContent += `<p>${watnaList[i]}</p>`;
+                        //watnaContent += `<p>${watnaList[i]}</p>`;
+                        watnaContent += `
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="${watnaList[i]}">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </span>
+                        </div>
+                        `;
                     }
 
                     loadModal(itemData.issueSn);
@@ -356,14 +384,11 @@ function loadModal(issueNo) {
                 tArr.push(itemData.info);
             });
 
+            hooker.append($('<optgroup class="selectTitle" label="My Side">'));
+            watna.append($('<optgroup class="selectTitle" label="My Side">'));
 
-            hooker.append($('<optgroup/>', {
-                label: "My Side Strength"
-            }));
-
-            watna.append($('<optgroup/>', {
-                label: "My Side Strength"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Strength">'));
+            watna.append($('<optgroup class="ml-2" label="Strength">'));
 
             for (var i = 0; i < sArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -377,13 +402,8 @@ function loadModal(issueNo) {
                 }));
             }
 
-            hooker.append($('<optgroup/>', {
-                label: "My Side Weakness"
-            }));
-
-            watna.append($('<optgroup/>', {
-                label: "My Side Weakness"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Weakness">'));
+            watna.append($('<optgroup class="ml-2" label="Weakness">'));
 
             for (var i = 0; i < wArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -397,13 +417,8 @@ function loadModal(issueNo) {
                 }));
             }
 
-            hooker.append($('<optgroup/>', {
-                label: "My Side Opportunity"
-            }));
-
-            watna.append($('<optgroup/>', {
-                label: "My Side Opportunity"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Opportunity">'));
+            watna.append($('<optgroup class="ml-2" label="Opportunity">'));
 
             for (var i = 0; i < oArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -417,13 +432,8 @@ function loadModal(issueNo) {
                 }));
             }
 
-            hooker.append($('<optgroup/>', {
-                label: "My Side Thread"
-            }));
-
-            watna.append($('<optgroup/>', {
-                label: "My Side Thread"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Thread">'));
+            watna.append($('<optgroup class="ml-2" label="Thread">'));
 
             for (var i = 0; i < tArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -459,13 +469,11 @@ function loadModal(issueNo) {
                 otArr.push(itemData.info);
             });
 
-            hooker.append($('<optgroup/>', {
-                label: "Other Side Strength"
-            }));
+            hooker.append($('<optgroup class="selectTitle" label="Other Side">'));
+            watna.append($('<optgroup class="selectTitle" label="Other Side">'));
 
-            watna.append($('<optgroup/>', {
-                label: "Other Side Strength"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Strength">'));
+            watna.append($('<optgroup class="ml-2" label="Strength">'));
 
             for (var i = 0; i < osArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -479,13 +487,8 @@ function loadModal(issueNo) {
                 }));
             }
 
-            hooker.append($('<optgroup/>', {
-                label: "Other Side Weakness"
-            }));
-
-            watna.append($('<optgroup/>', {
-                label: "Other Side Weakness"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Weakness">'));
+            watna.append($('<optgroup class="ml-2" label="Weakness">'));
 
             for (var i = 0; i < owArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -499,13 +502,8 @@ function loadModal(issueNo) {
                 }));
             }
 
-            hooker.append($('<optgroup/>', {
-                label: "Other Side Opportunity"
-            }));
-
-            watna.append($('<optgroup/>', {
-                label: "Other Side Opportunity"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Opportunity">'));
+            watna.append($('<optgroup class="ml-2" label="Opportunity">'));
 
             for (var i = 0; i < ooArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -519,13 +517,8 @@ function loadModal(issueNo) {
                 }));
             }
 
-            hooker.append($('<optgroup/>', {
-                label: "Other Side Thread"
-            }));
-
-            watna.append($('<optgroup/>', {
-                label: "Other Side Thread"
-            }));
+            hooker.append($('<optgroup class="ml-2" label="Thread">'));
+            watna.append($('<optgroup class="ml-2" label="Thread">'));
 
             for (var i = 0; i < otArr.length; i++) {
                 hooker.append($('<option/>', {
@@ -566,7 +559,15 @@ $("#btnAddWatna").click(function () {
     var html = "";
 
     for (var i = 0; i < itemList.length; i++) {
-        html += `<p>${itemList[i]}</p>`;
+        //html += `<p>${itemList[i]}</p>`;
+        html += `
+        <div class="input-group mb-3">
+        <input type="text" class="form-control" value="${itemList[i]}">
+        <span class="input-group-append">
+            <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+        </span>
+    </div>
+        `;
     }
 
     $(".watnaContainer").append(html);
@@ -587,7 +588,15 @@ $("#btnAddHooker").click(function () {
     var html = "";
 
     for (var i = 0; i < itemList.length; i++) {
-        html += `<p>${itemList[i]}</p>`;
+        //html += `<p>${itemList[i]}</p>`;
+        html += `
+        <div class="input-group mb-3">
+        <input type="text" class="form-control" value="${itemList[i]}">
+        <span class="input-group-append">
+            <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+        </span>
+    </div>
+        `;
     }
 
     $(".hookerContainer").append(html);
@@ -618,17 +627,18 @@ async function saveList(btnId) {
     var hookerList = [];
     var watnaList = [];
 
-    var hookerContent = $(".hookerContainer p");
-    //console.log(hookerContent);
+    //var hookerContent = $(".hookerContainer p");
+    var hookerContent = $(".hookerContainer input");
+    console.log(hookerContent);
 
     for (var i = 0; i < hookerContent.length; i++) {
-        hookerList.push($(hookerContent[i]).text());
+        hookerList.push($(hookerContent[i]).val());
     }
 
-    var watnaContent = $(".watnaContainer p");
+    var watnaContent = $(".watnaContainer input");
 
     for (var i = 0; i < watnaContent.length; i++) {
-        watnaList.push($(watnaContent[i]).text());
+        watnaList.push($(watnaContent[i]).val());
     }
 
     let reqObj = {
@@ -636,7 +646,7 @@ async function saveList(btnId) {
         hooker: hookerList,
         watna: watnaList
     }
-    //console.log(reqObj);
+    console.log(reqObj);
 
     isSave == false;
 

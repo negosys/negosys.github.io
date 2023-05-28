@@ -55724,5 +55724,9 @@ th {
   display: none;
 }
 
+.warningField {
+  border-color: red;
+}
+
 
 /*# sourceMappingURL=adminlte.css.map */

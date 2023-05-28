@@ -468,6 +468,8 @@ function initialDropdownBox() {
 }
 
 async function saveSWOT(btnId) {
+    isSave = false;
+    
     removeEmptyClass();
     if (checkEmptyAll()) return;
 

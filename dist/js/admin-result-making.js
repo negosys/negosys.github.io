@@ -59,6 +59,14 @@ document
         saveList('save');
     });
 
+document
+    .getElementById("btnBack")
+    .addEventListener("click", prevPage);
+
+function prevPage() {
+    location.href = "swot-logic.html?projectSn=" + projectNo + "&userSn=" + userNo;
+}
+
 $(".hookerContainer").on("click", '.btn-danger', function (event) {
     event.preventDefault();
     var removeDiv = event.currentTarget.offsetParent;
@@ -609,7 +617,7 @@ $("#btnAddHooker").click(function () {
 
 async function saveList(btnId) {
     isSave = false;
-    
+
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var issueId;

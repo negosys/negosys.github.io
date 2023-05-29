@@ -62,10 +62,10 @@ $("#tblData").on("click", '.deleteBtn', function (event) {
 });
 
 function nextPage() {
-    if (getIssueCount() < 5) {
+    if (getIssueCount() < 3) {
         Swal.fire({
             icon: 'warning',
-            text: 'Minimum 5 Issues.'
+            text: 'Minimum 3 Issues.'
         });
         return;
     }

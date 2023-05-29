@@ -59,6 +59,14 @@ document
     .getElementById("btnNextIssue")
     .addEventListener("click", loadNextResult);
 
+document
+    .getElementById("btnBack")
+    .addEventListener("click", prevPage);
+
+function prevPage() {
+    location.href = "swot-logic.html?projectSn=" + projectNo;
+}
+
 function loadResultMakingList() {
     $("#loadingView").show();
 

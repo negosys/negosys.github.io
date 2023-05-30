@@ -469,9 +469,9 @@ function initialDropdownBox() {
 
 async function saveSWOT(btnId) {
     isSave = false;
-    
+
     removeEmptyClass();
-    if (checkEmptyAll()) return;
+    if (checkEmpty()) return;
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
@@ -623,7 +623,7 @@ async function saveSWOT(btnId) {
         contentType: "application/json",
         success: function (data) {
             var x = JSON.stringify(data);
-            console.log(x);
+            //console.log(x);
 
             refreshSWOTList();
 
@@ -1002,3 +1002,14 @@ function checkEmpty() {
     }
     return false;
 }
+
+$('.container-fluid').bind('input', function (event) {
+    var getInput = event.target.getAttribute("id");
+    var inputId = "#".concat(getInput);
+    if ($(inputId).val().length > 0) {
+        $(inputId).removeClass("warningField");
+    }else{
+
+    }
+
+});

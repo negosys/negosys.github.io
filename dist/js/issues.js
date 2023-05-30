@@ -9,7 +9,7 @@ var curIssuesNo = "";
 $(document).ready(async function () {
     var userDetails = await user.getUserDetails();
     userRole = userDetails.userLevel;
-    
+
     var ck = await user.getCookies("userRole");
     if (ck == 'undefined' || ck == 'null') {
         Swal.fire({
@@ -31,8 +31,6 @@ $(document).ready(async function () {
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
     userNo = urlParams.get('userSn');
-    //Temp set value
-    userNo = 1;
 
     if (projectNo == null || projectNo == "") {
         Swal.fire({
@@ -52,6 +50,10 @@ document
     .addEventListener("click", addIssue);
 
 document
+    .getElementById("btnBack")
+    .addEventListener("click", prevPage);
+
+document
     .getElementById("btnNext")
     .addEventListener("click", nextPage);
 
@@ -60,6 +62,14 @@ $("#tblData").on("click", '.deleteBtn', function (event) {
     var issueId = event.target.getAttribute("data-id");
     deleteIssue(issueId);
 });
+
+function prevPage() {
+    if (userRole == "ADMIN") {
+        location.href = "admin-projects.html";
+    } else {
+        location.href = "projects.html";
+    }
+}
 
 function nextPage() {
     if (getIssueCount() < 3) {
@@ -136,6 +146,7 @@ async function loadProjectIssueList() {
         "ajax": {
             //url: 'https://api.negosys.co.kr/nego/issuesByProjectSn',
             url: ajaxUrl,
+            type: "GET",
             xhrFields: {
                 withCredentials: true
             },

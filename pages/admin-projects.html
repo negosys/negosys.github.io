@@ -71,7 +71,7 @@
       <section class="content">
         <div class="container-fluid">
 
-          <div class="row">
+          <!--div class="row">
             <div class="col-6 col-sm-4">
               <div class="form-group">
                 <label>Customer:</label>
@@ -82,9 +82,9 @@
               <button id="btnSearchCustomer" type="button" class="btn themeColor"><i class="fa fa-search"></i>
                 Search</button>
             </div>
-          </div>
+          </div-->
 
-          <div class="row divCustomerList hiddenField">
+          <div class="row divCustomerList">
             <div class="col-6 col-sm-4">
               <div class="form-group">
                 <label>Select Customer</label>
@@ -154,11 +154,8 @@
   <script>
     $(function () {
       //Initialize Select2 Elements
-      $('.select2').select2()
-
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
+      $('.select2').select2({
+        //tags: true
       })
     })
 

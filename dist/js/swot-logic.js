@@ -275,25 +275,36 @@ function loadOtherSide(item) {
 }
 
 async function loadNextResult() {
+    var btnP = document.getElementById("btnPrevIssue");
+    var btnN = document.getElementById("btnNextIssue");
+
+    btnN.classList.add("disabled");
+    btnN.classList.add("iconDisableThemeColor");
+
     //save data before load another issue
+    $("#loadingView").show();
     await saveSWOT();
 
-    if (isSave == false) return;
+    if (isSave == false) {
+        $("#loadingView").hide();
+        btnN.classList.remove("disabled");
+        btnN.classList.remove("iconDisableThemeColor");
+        return;
+    }
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var nextId = parseInt(curId) + 1;
     var issueId;
 
-    var btnP = document.getElementById("btnPrevIssue");
-    var btnN = document.getElementById("btnNextIssue");
+
     if (nextId >= totalIssues) {
         btnN.classList.add("disabled");
         btnN.classList.add("iconDisableThemeColor");
     } else {
         btnN.classList.remove("disabled");
-        btnP.classList.remove("disabled");
         btnN.classList.remove("iconDisableThemeColor");
+        btnP.classList.remove("disabled");
         btnP.classList.remove("iconDisableThemeColor");
     }
 
@@ -336,29 +347,41 @@ async function loadNextResult() {
             loadOtherSide(itemData);
         }
     });
+    $("#loadingView").hide();
 }
 
 async function loadPrevResult() {
+    var btnP = document.getElementById("btnPrevIssue");
+    var btnN = document.getElementById("btnNextIssue");
+
+    btnP.classList.add("disabled");
+    btnP.classList.add("iconDisableThemeColor");
+
     //save data before load another issue
+    $("#loadingView").show();
     await saveSWOT();
 
-    if (isSave == false) return;
+    if (isSave == false) {
+        $("#loadingView").hide();
+        btnP.classList.remove("disabled");
+        btnP.classList.remove("iconDisableThemeColor");
+        return;
+    }
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var prevId = parseInt(curId) - 1;
     var issueId;
 
-    var btnP = document.getElementById("btnPrevIssue");
-    var btnN = document.getElementById("btnNextIssue");
+
     if (prevId <= 1) {
         btnP.classList.add("disabled");
         btnP.classList.add("iconDisableThemeColor");
     } else {
         btnP.classList.remove("disabled");
+        btnP.classList.remove("iconDisableThemeColor");
         btnN.classList.remove("disabled");
         btnN.classList.remove("iconDisableThemeColor");
-        btnP.classList.remove("iconDisableThemeColor");
     }
 
     $.each(issueSnList, function (i, itemData) {
@@ -400,6 +423,8 @@ async function loadPrevResult() {
             loadOtherSide(itemData);
         }
     });
+    $("#loadingView").hide();
+
 }
 
 function clearMeSide() {
@@ -470,7 +495,7 @@ function clearOtherSide() {
 
 async function saveSWOT(btnId) {
     isSave = false;
-    
+
     removeEmptyClass();
     if (checkEmpty()) return;
 
@@ -706,7 +731,7 @@ function refreshSWOTList() {
     });
 }
 
-function checkEmpty(){
+function checkEmpty() {
     var isEmpty = false;
 
     for (let i = 1; i <= 3; i++) {
@@ -717,25 +742,33 @@ function checkEmpty(){
         var oid = "#meSwotO".concat(i);
         var tid = "#meSwotT".concat(i);
 
-        if ($(sid.concat("logic")).val().length == 0) {
-            $(sid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+
+        if ($(sid).html().length > 0) {
+            if ($(sid.concat("logic")).val().length == 0) {
+                $(sid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
 
-        if ($(wid.concat("logic")).val().length == 0) {
-            $(wid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+        if ($(wid).html().length > 0) {
+            if ($(wid.concat("logic")).val().length == 0) {
+                $(wid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
 
-
-        if ($(oid.concat("logic")).val().length == 0) {
-            $(oid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+        if ($(oid).html().length > 0) {
+            if ($(oid.concat("logic")).val().length == 0) {
+                $(oid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
 
-        if ($(tid.concat("logic")).val().length == 0) {
-            $(tid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+        if ($(tid).html().length > 0) {
+            if ($(tid.concat("logic")).val().length == 0) {
+                $(tid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
 
 
@@ -745,27 +778,34 @@ function checkEmpty(){
         oid = "#otherSwotO".concat(i);
         tid = "#otherSwotT".concat(i);
 
-        if ($(sid.concat("logic")).val().length == 0) {
-            $(sid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+        if ($(sid).html().length > 0) {
+            if ($(sid.concat("logic")).val().length == 0) {
+                $(sid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
 
-
-        if ($(wid.concat("logic")).val().length == 0) {
-            $(wid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+        if ($(wid).html().length > 0) {
+            if ($(wid.concat("logic")).val().length == 0) {
+                $(wid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
 
-
-        if ($(oid.concat("logic")).val().length == 0) {
-            $(oid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+        if ($(oid).html().length > 0) {
+            if ($(oid.concat("logic")).val().length == 0) {
+                $(oid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
 
-        if ($(tid.concat("logic")).val().length == 0) {
-            $(tid.concat("logic")).addClass("warningField");
-            isEmpty = true;
+        if ($(tid).html().length > 0) {
+            if ($(tid.concat("logic")).val().length == 0) {
+                $(tid.concat("logic")).addClass("warningField");
+                isEmpty = true;
+            }
         }
+
     }
 
     if (isEmpty) {
@@ -778,7 +818,7 @@ function checkEmpty(){
     return false;
 }
 
-function removeEmptyClass(){
+function removeEmptyClass() {
     for (let i = 1; i <= 3; i++) {
 
         //me

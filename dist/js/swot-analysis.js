@@ -242,18 +242,28 @@ function loadOtherSide(item) {
 }
 
 async function loadNextResult() {
+    var btnP = document.getElementById("btnPrevIssue");
+    var btnN = document.getElementById("btnNextIssue");
+
+    btnN.classList.add("disabled");
+    btnN.classList.add("iconDisableThemeColor");
+
     //save data before load another issue
+    $("#loadingView").show();
     await saveSWOT();
 
-    if (isSave == false) return;
+    if (isSave == false) {
+        $("#loadingView").hide();
+        btnN.classList.remove("disabled");
+        btnN.classList.remove("iconDisableThemeColor");
+        return;
+    }
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var nextId = parseInt(curId) + 1;
     var issueId;
 
-    var btnP = document.getElementById("btnPrevIssue");
-    var btnN = document.getElementById("btnNextIssue");
     if (nextId >= totalIssues) {
         btnN.classList.add("disabled");
         btnN.classList.add("iconDisableThemeColor");
@@ -302,21 +312,32 @@ async function loadNextResult() {
             loadOtherSide(itemData);
         }
     });
+    $("#loadingView").hide();
 }
 
 async function loadPrevResult() {
+    var btnP = document.getElementById("btnPrevIssue");
+    var btnN = document.getElementById("btnNextIssue");
+
+    btnP.classList.add("disabled");
+    btnP.classList.add("iconDisableThemeColor");
+
     //save data before load another issue
+    $("#loadingView").show();
     await saveSWOT();
 
-    if (isSave == false) return;
+    if (isSave == false) {
+        $("#loadingView").hide();
+        btnP.classList.remove("disabled");
+        btnP.classList.remove("iconDisableThemeColor");
+        return;
+    }
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var prevId = parseInt(curId) - 1;
     var issueId;
-
-    var btnP = document.getElementById("btnPrevIssue");
-    var btnN = document.getElementById("btnNextIssue");
+    
     if (prevId <= 1) {
         btnP.classList.add("disabled");
         btnP.classList.add("iconDisableThemeColor");
@@ -365,6 +386,7 @@ async function loadPrevResult() {
             loadOtherSide(itemData);
         }
     });
+    $("#loadingView").hide();
 }
 
 function clearMeSide() {

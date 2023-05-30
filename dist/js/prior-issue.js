@@ -305,7 +305,7 @@ async function loadProjectIssueList() {
                 }
 
                 let reasonVal = itemData.meReason;
-                if (itemData.meReason == null) {
+                if (itemData.meReason == null || itemData.meReason == "null") {
                     reasonVal = "";
                 }
 
@@ -344,7 +344,7 @@ async function loadProjectIssueList() {
                 }
 
                 let reasonVal = itemData.otherReason;
-                if (itemData.otherReason == null) {
+                if (itemData.otherReason == null || itemData.otherReason == "null") {
                     reasonVal = "";
                 }
 

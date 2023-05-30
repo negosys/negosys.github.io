@@ -173,6 +173,7 @@ function loadMeSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
     $.each(w, function (index, itemData) {
@@ -181,6 +182,7 @@ function loadMeSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
     $.each(o, function (index, itemData) {
@@ -189,6 +191,7 @@ function loadMeSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
     $.each(t, function (index, itemData) {
@@ -197,6 +200,7 @@ function loadMeSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
 }
@@ -213,6 +217,7 @@ function loadOtherSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
     $.each(w, function (index, itemData) {
@@ -221,6 +226,7 @@ function loadOtherSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
     $.each(o, function (index, itemData) {
@@ -229,6 +235,7 @@ function loadOtherSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
     $.each(t, function (index, itemData) {
@@ -237,6 +244,7 @@ function loadOtherSide(item) {
         $(id).val(itemData.info);
         $(id.concat("np")).val(itemData.np);
         $(id.concat("prior")).val(itemData.priority);
+        $(id.concat("logic")).html(itemData.logic);
     });
 
 }
@@ -530,7 +538,8 @@ async function saveSWOT(btnId) {
             var newS = {
                 np: $(sid.concat("np")).val(),
                 priority: $(sid.concat("prior")).val(),
-                info: $(sid).val()
+                info: $(sid).val(),
+                logic: $(sid.concat("logic")).html()
             }
             meSwotSList.push(newS);
         }
@@ -539,7 +548,8 @@ async function saveSWOT(btnId) {
             var newW = {
                 np: $(wid.concat("np")).val(),
                 priority: $(wid.concat("prior")).val(),
-                info: $(wid).val()
+                info: $(wid).val(),
+                logic: $(wid.concat("logic")).html()
             }
             meSwotWList.push(newW);
         }
@@ -548,7 +558,8 @@ async function saveSWOT(btnId) {
             var newO = {
                 np: $(oid.concat("np")).val(),
                 priority: $(oid.concat("prior")).val(),
-                info: $(oid).val()
+                info: $(oid).val(),
+                logic: $(oid.concat("logic")).html()
             }
             meSwotOList.push(newO);
         }
@@ -557,7 +568,8 @@ async function saveSWOT(btnId) {
             var newT = {
                 np: $(tid.concat("np")).val(),
                 priority: $(tid.concat("prior")).val(),
-                info: $(tid).val()
+                info: $(tid).val(),
+                logic: $(tid.concat("logic")).html()
             }
             meSwotTList.push(newT);
         }
@@ -578,7 +590,8 @@ async function saveSWOT(btnId) {
             var newS = {
                 np: $(sid.concat("np")).val(),
                 priority: $(sid.concat("prior")).val(),
-                info: $(sid).val()
+                info: $(sid).val(),
+                logic: $(sid.concat("logic")).html()
             }
             otherSwotSList.push(newS);
         }
@@ -587,7 +600,8 @@ async function saveSWOT(btnId) {
             var newW = {
                 np: $(wid.concat("np")).val(),
                 priority: $(wid.concat("prior")).val(),
-                info: $(wid).val()
+                info: $(wid).val(),
+                logic: $(wid.concat("logic")).html()
             }
             otherSwotWList.push(newW);
         }
@@ -596,7 +610,8 @@ async function saveSWOT(btnId) {
             var newO = {
                 np: $(oid.concat("np")).val(),
                 priority: $(oid.concat("prior")).val(),
-                info: $(oid).val()
+                info: $(oid).val(),
+                logic: $(oid.concat("logic")).html()
             }
             otherSwotOList.push(newO);
         }
@@ -605,7 +620,8 @@ async function saveSWOT(btnId) {
             var newT = {
                 np: $(tid.concat("np")).val(),
                 priority: $(tid.concat("prior")).val(),
-                info: $(tid).val()
+                info: $(tid).val(),
+                logic: $(tid.concat("logic")).html()
             }
             otherSwotTList.push(newT);
         }

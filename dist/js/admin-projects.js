@@ -2,6 +2,7 @@ import * as user from "./adminlte.js"
 
 var userRole;
 var userNo = 0;
+var filterCust = "";
 
 $(document).ready(async function () {
 
@@ -32,15 +33,61 @@ $(document).ready(async function () {
         })
         return cookie[cookieName];
     }
+
 });
 
-document
-    .getElementById("btnSearchCustomer")
-    .addEventListener("click", loadCustomerList);
+//document
+//.getElementById("btnSearchCustomer")
+//.addEventListener("click", loadCustomerList);
 
+
+$(document).on('input', '.select2-search__field', async function () {
+    await $(window).delay(500).promise();
+    //console.log("start");
+
+    //console.log(filterCust);
+    if (filterCust != $(".select2-search__field").val()) {
+        filterCust = $(".select2-search__field").val();
+        if (filterCust.length > 2) {
+            //console.log("load");
+            loadCustomerList(filterCust);
+        }
+    }
+});
+
+/*$('#ddlCustomerList').select2({
+    ajax: {
+        url: 'https://api.negosys.co.kr/a/users',
+        type: "GET",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        delay: 250,
+        data: function (data) {
+            console.log(data.term);
+            if (data.term != undefined) {
+                if (data.term.length > 2) {
+                    return {
+                        name: data.term // search term
+                    };
+                }
+            }
+        },
+        processResults: function (response) {
+            console.log(response);
+            return {
+                results: response.userNm
+            };
+        },
+        cache: true
+    }
+});*/
 
 $('#ddlCustomerList').on('select2:select', function (e) {
     var selectedCustomer = $("#ddlCustomerList").val();
+
+    console.log(selectedCustomer);
     if (selectedCustomer != 0) {
         loadProjectList(selectedCustomer);
         $("#loadingView").hide();
@@ -109,21 +156,12 @@ function loadProjectList(userSn) {
 
 }
 
-function loadCustomerList() {
-    var filterCust = $("#filterCustomer").val();
-    if (filterCust.length < 3) {
-        Swal.fire({
-            icon: 'warning',
-            text: 'At least 3 characters to load customer list.'
-        });
-        return;
-    }
-
+function loadCustomerList(fc) {
     $.ajax({
         url:
             'https://api.negosys.co.kr/a/users',
         type: "GET",
-        data: { name: filterCust },
+        data: { name: fc },
         xhrFields: {
             withCredentials: true
         },
@@ -142,7 +180,8 @@ function loadCustomerList() {
                     text: itemData.userNm
                 }));
             });
-            $(".divCustomerList").removeClass("hiddenField");
+            $("#ddlCustomerList").select2('close');
+            $("#ddlCustomerList").select2('open');
         },
         error: function (error) {
             console.log(JSON.stringify(error));

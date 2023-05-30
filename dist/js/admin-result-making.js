@@ -184,9 +184,20 @@ function loadResultMakingList() {
 }
 
 async function loadNextResult() {
+    var btnP = document.getElementById("btnPrevIssue");
+    var btnN = document.getElementById("btnNextIssue");
+    btnN.classList.add("disabled");
+    btnN.classList.add("iconDisableThemeColor");
+
+    $("#loadingView").show();
     await saveList();
 
-    if (isSave == false) return;
+    if (isSave == false) {
+        $("#loadingView").hide();
+        btnN.classList.remove("disabled");
+        btnN.classList.remove("iconDisableThemeColor");
+        return;
+    }
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
@@ -195,15 +206,14 @@ async function loadNextResult() {
 
     //console.log(totalIssues);
 
-    var btnP = document.getElementById("btnPrevIssue");
-    var btnN = document.getElementById("btnNextIssue");
+
     if (nextId >= totalIssues) {
         btnN.classList.add("disabled");
         btnN.classList.add("iconDisableThemeColor");
     } else {
         btnN.classList.remove("disabled");
-        btnP.classList.remove("disabled");
         btnN.classList.remove("iconDisableThemeColor");
+        btnP.classList.remove("disabled");
         btnP.classList.remove("iconDisableThemeColor");
     }
 
@@ -245,7 +255,14 @@ async function loadNextResult() {
                 // Trim the excess whitespace.
                 hookerList[i] = hookerList[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                hookerContent += `<p>${hookerList[i]}</p>`;
+                hookerContent += `
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="${hookerList[i]}">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </span>
+                        </div>
+                        `;
             }
 
             var watnaList = itemData.watna;
@@ -254,7 +271,14 @@ async function loadNextResult() {
                 // Trim the excess whitespace.
                 watnaList[i] = watnaList[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                watnaContent += `<p>${watnaList[i]}</p>`;
+                watnaContent += `
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="${watnaList[i]}">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </span>
+                        </div>
+                        `;
             }
 
             $(".issueTitle").html(issueTitle);
@@ -269,17 +293,27 @@ async function loadNextResult() {
 }
 
 async function loadPrevResult() {
+    var btnP = document.getElementById("btnPrevIssue");
+    var btnN = document.getElementById("btnNextIssue");
+
+    btnP.classList.add("disabled");
+    btnP.classList.add("iconDisableThemeColor");
+
+    $("#loadingView").show();
     await saveList();
 
-    if (isSave == false) return;
+    if (isSave == false) {
+        $("#loadingView").hide();
+        btnP.classList.remove("disabled");
+        btnP.classList.remove("iconDisableThemeColor");
+        return;
+    }
 
     var getCurrentId = $('.issueId').html();
     let curId = getCurrentId.charAt(0);
     var prevId = parseInt(curId) - 1;
     var issueId;
 
-    var btnP = document.getElementById("btnPrevIssue");
-    var btnN = document.getElementById("btnNextIssue");
     if (prevId <= 1) {
         btnP.classList.add("disabled");
         btnP.classList.add("iconDisableThemeColor");
@@ -328,7 +362,14 @@ async function loadPrevResult() {
                 // Trim the excess whitespace.
                 hookerList[i] = hookerList[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                hookerContent += `<p>${hookerList[i]}</p>`;
+                hookerContent += `
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="${hookerList[i]}">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </span>
+                        </div>
+                        `;
             }
 
             var watnaList = itemData.watna;
@@ -337,7 +378,14 @@ async function loadPrevResult() {
                 // Trim the excess whitespace.
                 watnaList[i] = watnaList[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                watnaContent += `<p>${watnaList[i]}</p>`;
+                watnaContent += `
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="${watnaList[i]}">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
+                            </span>
+                        </div>
+                        `;
             }
 
 

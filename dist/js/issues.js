@@ -40,7 +40,6 @@ $(document).ready(async function () {
         return;
     }
 
-
     loadProjectIssueList();
     getIssueCount();
 });

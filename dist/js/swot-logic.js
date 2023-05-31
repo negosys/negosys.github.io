@@ -148,9 +148,13 @@ function loadSWOTList() {
 
             });
 
+
             //console.log(issueSnList);
             $(".issueTitle").html(issueTitle);
             $(".totalIssue").html(totalIssueContent);
+
+            initialCardSize();
+
             $("#loadingView").hide();
         },
         error: function (error) {
@@ -347,6 +351,7 @@ async function loadNextResult() {
             loadOtherSide(itemData);
         }
     });
+    initialCardSize();
     $("#loadingView").hide();
 }
 
@@ -423,6 +428,7 @@ async function loadPrevResult() {
             loadOtherSide(itemData);
         }
     });
+    initialCardSize();
     $("#loadingView").hide();
 
 }
@@ -843,5 +849,55 @@ function removeEmptyClass() {
         $(wid.concat("logic")).removeClass("warningField");
         $(oid.concat("logic")).removeClass("warningField");
         $(tid.concat("logic")).removeClass("warningField");
+    }
+}
+
+function initialCardSize() {
+    var meid = ".card-meS";
+    var otherid = ".card-otherS";
+
+    var meHeight = $(meid).height();
+    var otherHeight = $(otherid).height();
+
+    if (meHeight > otherHeight) {
+        $(otherid).height(meHeight);
+    } else if (otherHeight > meHeight) {
+        $(meid).height(otherHeight);
+    }
+
+    meid = ".card-meW";
+    otherid = ".card-otherW";
+
+    meHeight = $(meid).height();
+    otherHeight = $(otherid).height();
+
+    if (meHeight > otherHeight) {
+        $(otherid).height(meHeight);
+    } else if (otherHeight > meHeight) {
+        $(meid).height(otherHeight);
+    }
+
+    meid = ".card-meO";
+    otherid = ".card-otherO";
+
+    meHeight = $(meid).height();
+    otherHeight = $(otherid).height();
+
+    if (meHeight > otherHeight) {
+        $(otherid).height(meHeight);
+    } else if (otherHeight > meHeight) {
+        $(meid).height(otherHeight);
+    }
+
+    meid = ".card-meT";
+    otherid = ".card-otherT";
+
+    meHeight = $(meid).height();
+    otherHeight = $(otherid).height();
+
+    if (meHeight > otherHeight) {
+        $(otherid).height(meHeight);
+    } else if (otherHeight > meHeight) {
+        $(meid).height(otherHeight);
     }
 }

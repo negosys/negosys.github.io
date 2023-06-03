@@ -91,6 +91,16 @@ async function loadTrackingList() {
 
             issueSnList.push(itemData.issueSn);
 
+            var issueResult = "";
+            var issueOption = "";
+
+            if (itemData.resultStr != null) {
+              issueResult = itemData.resultStr
+            }
+
+            if (itemData.optionStr != null) {
+              issueOption = itemData.optionStr
+            }
 
             //console.log(itemData.trackingHistory.length);
             var meTop1 = "";
@@ -128,8 +138,8 @@ async function loadTrackingList() {
                 otherMiddle1 = item.otherMiddle;
                 meBottom1 = item.meBottom;
                 otherBottom1 = item.otherBottom;
-                if (item.meResult != null) meResult1 = item.meResult;
-                if (item.otherResult != null) otherResult1 = item.otherResult;
+                meResult1 = item.meResult;
+                otherResult1 = item.otherResult;
               } else if (index == 1) {
                 meTop2 = item.meTop;
                 otherTop2 = item.otherTop;
@@ -137,8 +147,8 @@ async function loadTrackingList() {
                 otherMiddle2 = item.otherMiddle;
                 meBottom2 = item.meBottom;
                 otherBottom2 = item.otherBottom;
-                if (item.meResult != null) meResult2 = item.meResult;
-                if (item.otherResult != null) otherResult2 = item.otherResult;
+                meResult2 = item.meResult;
+                otherResult2 = item.otherResult;
               } else if (index == 2) {
                 meTop3 = item.meTop;
                 otherTop3 = item.otherTop;
@@ -146,8 +156,8 @@ async function loadTrackingList() {
                 otherMiddle3 = item.otherMiddle;
                 meBottom3 = item.meBottom;
                 otherBottom3 = item.otherBottom;
-                if (item.meResult != null) meResult3 = item.meResult;
-                if (item.otherResult != null) otherResult3 = item.otherResult;
+                meResult3 = item.meResult;
+                otherResult3 = item.otherResult;
               }
             });
 
@@ -245,10 +255,10 @@ async function loadTrackingList() {
                               </td>
         
                               <td class="tg-0lax" rowspan="6">
-                                <textarea id="result" type="text" class="form-control table-input" rows="6">${itemData.resultStr}</textarea>
+                                <textarea id="result" type="text" class="form-control table-input" rows="6">${issueResult}</textarea>
                               </td>
                               <td class="tg-0lax" rowspan="6">
-                                <textarea id="option" type="text" class="form-control table-input" rows="6">${itemData.optionStr}</textarea>
+                                <textarea id="option" type="text" class="form-control table-input" rows="6">${issueOption}</textarea>
                               </td>
                             </tr>
                             <tr>

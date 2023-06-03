@@ -22,8 +22,8 @@ export async function getUserDetails() {
     if (returnStatus == "401") {
       Swal.fire({
         text: "Sessioin expired. Please proceed to login.",
-        type: "warning",
-        //confirmButtonColor: '#DD6B55',
+        icon: "warning",
+        confirmButtonColor: '#5D66DF',
         confirmButtonText: 'Ok',
       }).then((result) => {
         if (result.value) {

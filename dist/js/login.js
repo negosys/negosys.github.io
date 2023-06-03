@@ -3,17 +3,22 @@ import * as user from "./adminlte.js"
 var userRole;
 
 $(document).ready(async function () {
-    /* var ck = await user.getCookies("userRole");
-    if (ck != 'undefined' || ck != 'null') {
-        var userDetails = await user.getUserDetails();
-        userRole = userDetails.userLevel;
+    var ck = await user.getCookies("userRole");
+    //console.log(ck);
+    if (ck == undefined) return;
 
-        if (userRole == "ADMIN") {
-            location.href = "pages/admin-projects.html";
-        } else {
-            location.href = "pages/projects.html";
+    if (ck != undefined) {
+        if (ck != 'null') {
+            var userDetails = await user.getUserDetails();
+            userRole = userDetails.userLevel;
+
+            if (userRole == "ADMIN") {
+                location.href = "pages/admin-projects.html";
+            } else {
+                location.href = "pages/projects.html";
+            }
         }
-    } */
+    }
 });
 
 document

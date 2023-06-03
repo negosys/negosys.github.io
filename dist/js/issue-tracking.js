@@ -128,8 +128,8 @@ async function loadTrackingList() {
                 otherMiddle1 = item.otherMiddle;
                 meBottom1 = item.meBottom;
                 otherBottom1 = item.otherBottom;
-                if (item.meResult != 'null') meResult1 = item.meResult;
-                if (item.otherResult != 'null') otherResult1 = item.otherResult;
+                if (item.meResult != null) meResult1 = item.meResult;
+                if (item.otherResult != null) otherResult1 = item.otherResult;
               } else if (index == 1) {
                 meTop2 = item.meTop;
                 otherTop2 = item.otherTop;
@@ -137,8 +137,8 @@ async function loadTrackingList() {
                 otherMiddle2 = item.otherMiddle;
                 meBottom2 = item.meBottom;
                 otherBottom2 = item.otherBottom;
-                if (item.meResult != 'null') meResult2 = item.meResult;
-                if (item.otherResult != 'null') otherResult2 = item.otherResult;
+                if (item.meResult != null) meResult2 = item.meResult;
+                if (item.otherResult != null) otherResult2 = item.otherResult;
               } else if (index == 2) {
                 meTop3 = item.meTop;
                 otherTop3 = item.otherTop;
@@ -146,8 +146,8 @@ async function loadTrackingList() {
                 otherMiddle3 = item.otherMiddle;
                 meBottom3 = item.meBottom;
                 otherBottom3 = item.otherBottom;
-                if (item.meResult != 'null') meResult3 = item.meResult;
-                if (item.otherResult != 'null') otherResult3 = item.otherResult;
+                if (item.meResult != null) meResult3 = item.meResult;
+                if (item.otherResult != null) otherResult3 = item.otherResult;
               }
             });
 

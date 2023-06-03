@@ -11,15 +11,17 @@ var issueSnList = [];
 var isSave = false;
 
 $(document).ready(async function () {
-    var userDetails = await user.getUserDetails();
-    userRole = userDetails.userLevel;
-
     var ck = await user.getCookies("userRole");
-    if (ck == 'undefined' || ck == 'null') {
+    var sessionExp = false;
+
+    if (ck == undefined) sessionExp = true;
+    if (ck == 'null') sessionExp = true;
+
+     if (sessionExp == true) {
         Swal.fire({
             text: "Sessioin expired. Please proceed to login.",
-            type: "warning",
-            //confirmButtonColor: '#DD6B55',
+            icon: "warning",
+            confirmButtonColor: '#5D66DF',
             confirmButtonText: 'Ok',
         }).then((result) => {
             if (result.value) {
@@ -28,6 +30,9 @@ $(document).ready(async function () {
         });
         return;
     }
+
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
 
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);

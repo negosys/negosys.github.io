@@ -7,15 +7,17 @@ var projectNo = "";
 var curIssuesNo = "";
 
 $(document).ready(async function () {
-    var userDetails = await user.getUserDetails();
-    userRole = userDetails.userLevel;
-
     var ck = await user.getCookies("userRole");
-    if (ck == 'undefined' || ck == 'null') {
+    var sessionExp = false;
+
+    if (ck == undefined) sessionExp = true;
+    if (ck == 'null') sessionExp = true;
+
+    if (sessionExp == true) {
         Swal.fire({
             text: "Sessioin expired. Please proceed to login.",
-            type: "warning",
-            //confirmButtonColor: '#DD6B55',
+            icon: "warning",
+            confirmButtonColor: '#5D66DF',
             confirmButtonText: 'Ok',
         }).then((result) => {
             if (result.value) {
@@ -24,6 +26,9 @@ $(document).ready(async function () {
         });
         return;
     }
+
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
 
     loadIssueKind();
 
@@ -57,9 +62,12 @@ document
     .addEventListener("click", nextPage);
 
 $("#tblData").on("click", '.deleteBtn', function (event) {
-    event.preventDefault()
+    event.preventDefault();
     var issueId = event.target.getAttribute("data-id");
-    deleteIssue(issueId);
+    var issueText = event.target.getAttribute("data-text");
+    console.log(issueId);
+    console.log(issueText); 
+    deleteIssue(issueId, issueText);
 });
 
 function prevPage() {
@@ -158,12 +166,14 @@ async function loadProjectIssueList() {
             { "data": "issueKind", "width": "30%" },
             { "data": "issue", "width": "40%" },
             {
-                "data": "issueSn",
+                "data": null,
                 "render": function (data) {
+                    var iText = $.trim(data.issue);
+                    //console.log(iText);
                     return `
                             <div class="text-center">
-                                <a data-id=${data} class="deleteBtn btn themeColor" >
-                                    <i data-id=${data} class="fa fa-trash-alt"></i> 
+                                <a data-id=${data.issueSn} data-text=${iText} class="deleteBtn btn themeColor" >
+                                    <i data-id=${data.issueSn} data-text=${iText} class="fa fa-trash-alt"></i> 
                                 </a>
                             </div>
                            `;
@@ -318,7 +328,7 @@ function addIssue() {
     });
 }
 
-function deleteIssue(issueSn) {
+function deleteIssue(issueSn, issueText) {
     //console.log(issueSn);
 
     if (issueSn == '') {
@@ -340,25 +350,38 @@ function deleteIssue(issueSn) {
         ajaxData = { issueSn: issueSn };
     }
 
-    $.ajax({
-        url: ajaxUrl,
-        type: "DELETE",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
-        data: ajaxData,
-        success: function (data) {
-            var x = JSON.stringify(data);
-            console.log(x);
-            loadProjectIssueList();
-        },
-        error: function (error) {
-            console.log(JSON.stringify(error));
-            Swal.fire({
-                icon: 'error',
-                text: 'Failed to delete issue'
+    Swal.fire({
+        title: 'Are you sure to delete?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#5D66DF',
+        //cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: ajaxUrl,
+                type: "DELETE",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                data: ajaxData,
+                success: function (data) {
+                    var x = JSON.stringify(data);
+                    console.log(x);
+                    loadProjectIssueList();
+                },
+                error: function (error) {
+                    console.log(JSON.stringify(error));
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Failed to delete issue'
+                    });
+                }
             });
         }
     });
+
 }

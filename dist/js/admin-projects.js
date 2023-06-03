@@ -5,17 +5,17 @@ var userNo = 0;
 var filterCust = "";
 
 $(document).ready(async function () {
-
-    var userDetails = await user.getUserDetails();
-    userRole = userDetails.userLevel;
-
     var ck = getCookies("userRole");
+    var sessionExp = false;
+
+    if (ck == undefined) sessionExp = true;
+    if (ck == 'null') sessionExp = true;
     //console.log(ck);
-    if (ck == 'undefined' || ck == 'null') {
+    if (sessionExp == true) {
         Swal.fire({
             text: "Sessioin expired. Please proceed to login.",
-            type: "warning",
-            //confirmButtonColor: '#DD6B55',
+            icon: "warning",
+            confirmButtonColor: '#5D66DF',
             confirmButtonText: 'Ok',
         }).then((result) => {
             if (result.value) {
@@ -24,6 +24,9 @@ $(document).ready(async function () {
         });
         return;
     }
+
+    var userDetails = await user.getUserDetails();
+    userRole = userDetails.userLevel;
 
     function getCookies(cookieName) {
         let cookie = {};
@@ -187,7 +190,8 @@ function loadCustomerList(fc) {
             console.log(JSON.stringify(error));
             Swal.fire({
                 icon: 'error',
-                text: 'Failed to load customer list.'
+                text: 'Failed to load customer list.',
+                confirmButtonColor: '#5D66DF',
             });
         }
     });

@@ -15,7 +15,7 @@ $(document).ready(async function () {
     if (ck == undefined) sessionExp = true;
     if (ck == 'null') sessionExp = true;
 
-    /* if (sessionExp == true) {
+    if (sessionExp == true) {
         Swal.fire({
             text: "Sessioin expired. Please proceed to login.",
             icon: "warning",
@@ -27,7 +27,7 @@ $(document).ready(async function () {
             }
         });
         return;
-    } */
+    }
 
     var userDetails = await user.getUserDetails();
     userRole = userDetails.userLevel;

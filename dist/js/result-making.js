@@ -15,7 +15,7 @@ $(document).ready(async function () {
     if (ck == undefined) sessionExp = true;
     if (ck == 'null') sessionExp = true;
 
-    if (sessionExp == true) {
+    /* if (sessionExp == true) {
         Swal.fire({
             text: "Sessioin expired. Please proceed to login.",
             icon: "warning",
@@ -27,7 +27,7 @@ $(document).ready(async function () {
             }
         });
         return;
-    }
+    } */
 
     var userDetails = await user.getUserDetails();
     userRole = userDetails.userLevel;
@@ -86,7 +86,7 @@ function loadResultMakingList() {
         crossDomain: true,
         success: function (data) {
 
-            //console.log(JSON.stringify(data));
+            console.log(data);
 
             $("#loadingView").show();
             var issueTitle = "";
@@ -131,6 +131,8 @@ function loadResultMakingList() {
                         watnaContent += `<p>${watnaList[i]}</p>`;
                     }
 
+                    console.log(hookerList);
+                    console.log(hookerList.length);
                     //hookerContent += `
                     //<p>${itemData.hooker}</p>
                     //`;
@@ -138,6 +140,14 @@ function loadResultMakingList() {
                     //watnaContent += `
                     //<p>${itemData.watna}</p>
                     //`;
+                    if (hookerList.length == 0 && watnaList.length == 0) {
+                        $("#labelDiv").removeClass("hiddenField");
+                        $("#argumentationDiv").addClass("hiddenField");
+                    } else {
+                        $("#labelDiv").addClass("hiddenField");
+                        $("#argumentationDiv").removeClass("hiddenField");
+
+                    }
                 }
 
                 var issueSnMatch = {
@@ -148,7 +158,7 @@ function loadResultMakingList() {
                 issueSnList.push(issueSnMatch);
             });
 
-            console.log(issueSnList);
+            //console.log(issueSnList);
             $(".issueTitle").html(issueTitle);
             $(".totalIssue").html(totalIssueContent);
             $(".hookerContainer").html(hookerContent);
@@ -172,7 +182,7 @@ function loadNextResult() {
     var nextId = parseInt(curId) + 1;
     var issueId;
 
-    console.log(totalIssues);
+    //console.log(totalIssues);
 
     var btnP = document.getElementById("btnPrevIssue");
     var btnN = document.getElementById("btnNextIssue");
@@ -243,6 +253,15 @@ function loadNextResult() {
             //watnaContent += `
             //<p>${itemData.watna}</p>
             //`;
+
+            if (hookerList.length == 0 && watnaList.length == 0) {
+                $("#labelDiv").removeClass("hiddenField");
+                $("#argumentationDiv").addClass("hiddenField");
+            } else {
+                $("#labelDiv").addClass("hiddenField");
+                $("#argumentationDiv").removeClass("hiddenField");
+
+            }
 
             $(".issueTitle").html(issueTitle);
             $(".totalIssue").html(totalIssueContent);
@@ -328,6 +347,15 @@ function loadPrevResult() {
             //watnaContent += `
             //<p>${itemData.watna}</p>
             //`;
+
+            if (hookerList.length == 0 && watnaList.length == 0) {
+                $("#labelDiv").removeClass("hiddenField");
+                $("#argumentationDiv").addClass("hiddenField");
+            } else {
+                $("#labelDiv").addClass("hiddenField");
+                $("#argumentationDiv").removeClass("hiddenField");
+
+            }
 
             $(".issueTitle").html(issueTitle);
             $(".totalIssue").html(totalIssueContent);

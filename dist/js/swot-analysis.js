@@ -14,8 +14,8 @@ $(document).ready(async function () {
     var ck = await user.getCookies("userRole");
     var sessionExp = false;
 
-  if (ck == undefined) sessionExp = true;
-  if (ck == 'null') sessionExp = true;
+    if (ck == undefined) sessionExp = true;
+    if (ck == 'null') sessionExp = true;
 
     if (sessionExp == true) {
         Swal.fire({
@@ -34,7 +34,7 @@ $(document).ready(async function () {
     var userDetails = await user.getUserDetails();
     userRole = userDetails.userLevel;
 
-    
+
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     projectNo = urlParams.get('projectSn');
@@ -351,7 +351,7 @@ async function loadPrevResult() {
     let curId = getCurrentId.charAt(0);
     var prevId = parseInt(curId) - 1;
     var issueId;
-    
+
     if (prevId <= 1) {
         btnP.classList.add("disabled");
         btnP.classList.add("iconDisableThemeColor");
@@ -683,10 +683,24 @@ async function saveSWOT(btnId) {
         },
         error: function (error) {
             console.log(JSON.stringify(error));
-            Swal.fire({
-                icon: 'error',
-                text: 'Failed to update issue SWOT data.'
-            });
+            var returnStatus = error.status;
+            if (returnStatus == "401") {
+                Swal.fire({
+                    text: "Sessioin expired. Please proceed to login.",
+                    icon: "warning",
+                    confirmButtonColor: '#5D66DF',
+                    confirmButtonText: 'Ok',
+                }).then((result) => {
+                    if (result.value) {
+                        location.href = "../login.html"
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Failed to update issue SWOT data.'
+                });
+            }
             $("#loadingView").hide();
             return false;
         }
@@ -1052,7 +1066,7 @@ $('.container-fluid').bind('input', function (event) {
     var inputId = "#".concat(getInput);
     if ($(inputId).val().length > 0) {
         $(inputId).removeClass("warningField");
-    }else{
+    } else {
 
     }
 

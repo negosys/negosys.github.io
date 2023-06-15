@@ -683,10 +683,24 @@ async function saveSWOT(btnId) {
         },
         error: function (error) {
             console.log(JSON.stringify(error));
-            Swal.fire({
-                icon: 'error',
-                text: 'Failed to update issue SWOT data.'
-            });
+            var returnStatus = error.status;
+            if (returnStatus == "401") {
+                Swal.fire({
+                    text: "Sessioin expired. Please proceed to login.",
+                    icon: "warning",
+                    confirmButtonColor: '#5D66DF',
+                    confirmButtonText: 'Ok',
+                }).then((result) => {
+                    if (result.value) {
+                        location.href = "../login.html"
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Failed to update issue SWOT data.'
+                });
+            }
             $("#loadingView").hide();
             return false;
         }

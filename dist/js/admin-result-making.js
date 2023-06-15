@@ -17,7 +17,7 @@ $(document).ready(async function () {
     if (ck == undefined) sessionExp = true;
     if (ck == 'null') sessionExp = true;
 
-     if (sessionExp == true) {
+    if (sessionExp == true) {
         Swal.fire({
             text: "Sessioin expired. Please proceed to login.",
             icon: "warning",
@@ -419,7 +419,7 @@ function loadModal(issueNo) {
         crossDomain: true,
         success: function (data) {
 
-            //console.log(JSON.stringify(data));
+            console.log(data);
 
             var hooker = $("#ddlHooker");
             hooker.empty();
@@ -434,19 +434,35 @@ function loadModal(issueNo) {
             var tArr = [];
 
             $.each(data.meSwotS, function (index, itemData) {
-                sArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                sArr.push(s);
             });
 
             $.each(data.meSwotW, function (index, itemData) {
-                wArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                wArr.push(s);
             });
 
             $.each(data.meSwotO, function (index, itemData) {
-                oArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                oArr.push(s);
             });
 
             $.each(data.meSwotT, function (index, itemData) {
-                tArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                tArr.push(s);
             });
 
             hooker.append($('<optgroup class="selectTitle" label="My Side">'));
@@ -455,16 +471,22 @@ function loadModal(issueNo) {
             hooker.append($('<optgroup class="ml-2" label="Strength">'));
             watna.append($('<optgroup class="ml-2" label="Strength">'));
 
+            console.log(sArr);
             for (var i = 0; i < sArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: sArr[i],
-                    text: sArr[i]
+                    value: sArr[i].info,
+                    text: sArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: sArr[i],
-                    text: sArr[i]
+                    value: sArr[i].info,
+                    text: sArr[i].info
                 }));
+
+                if (sArr[i].logic != "") {
+                    hooker.append($('<option>').val(sArr[i].logic).text(sArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(sArr[i].logic).text(sArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             hooker.append($('<optgroup class="ml-2" label="Weakness">'));
@@ -472,14 +494,19 @@ function loadModal(issueNo) {
 
             for (var i = 0; i < wArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: wArr[i],
-                    text: wArr[i]
+                    value: wArr[i].info,
+                    text: wArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: wArr[i],
-                    text: wArr[i]
+                    value: wArr[i].info,
+                    text: wArr[i].info
                 }));
+
+                if (wArr[i].logic != "") {
+                    hooker.append($('<option>').val(wArr[i].logic).text(wArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(wArr[i].logic).text(wArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             hooker.append($('<optgroup class="ml-2" label="Opportunity">'));
@@ -487,14 +514,19 @@ function loadModal(issueNo) {
 
             for (var i = 0; i < oArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: oArr[i],
-                    text: oArr[i]
+                    value: oArr[i].info,
+                    text: oArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: oArr[i],
-                    text: oArr[i]
+                    value: oArr[i].info,
+                    text: oArr[i].info
                 }));
+
+                if (oArr[i].logic != "") {
+                    hooker.append($('<option>').val(oArr[i].logic).text(oArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(oArr[i].logic).text(oArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             hooker.append($('<optgroup class="ml-2" label="Thread">'));
@@ -502,14 +534,19 @@ function loadModal(issueNo) {
 
             for (var i = 0; i < tArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: tArr[i],
-                    text: tArr[i]
+                    value: tArr[i].info,
+                    text: tArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: tArr[i],
-                    text: tArr[i]
+                    value: tArr[i].info,
+                    text: tArr[i].info
                 }));
+
+                if (tArr[i].logic != "") {
+                    hooker.append($('<option>').val(tArr[i].logic).text(tArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(tArr[i].logic).text(tArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             //other side
@@ -519,19 +556,35 @@ function loadModal(issueNo) {
             var otArr = [];
 
             $.each(data.otherSwotS, function (index, itemData) {
-                osArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                osArr.push(s);
             });
 
             $.each(data.otherSwotW, function (index, itemData) {
-                owArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                owArr.push(s);
             });
 
             $.each(data.otherSwotO, function (index, itemData) {
-                ooArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                ooArr.push(s);
             });
 
             $.each(data.otherSwotT, function (index, itemData) {
-                otArr.push(itemData.info);
+                var s = {
+                    info: itemData.info,
+                    logic: itemData.logic
+                }
+                otArr.push(s);
             });
 
             hooker.append($('<optgroup class="selectTitle" label="Other Side">'));
@@ -542,14 +595,19 @@ function loadModal(issueNo) {
 
             for (var i = 0; i < osArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: osArr[i],
-                    text: osArr[i]
+                    value: osArr[i].info,
+                    text: osArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: osArr[i],
-                    text: osArr[i]
+                    value: osArr[i].info,
+                    text: osArr[i].info
                 }));
+
+                if (osArr[i].logic != "") {
+                    hooker.append($('<option>').val(osArr[i].logic).text(osArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(osArr[i].logic).text(osArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             hooker.append($('<optgroup class="ml-2" label="Weakness">'));
@@ -557,14 +615,19 @@ function loadModal(issueNo) {
 
             for (var i = 0; i < owArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: owArr[i],
-                    text: owArr[i]
+                    value: owArr[i].info,
+                    text: owArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: owArr[i],
-                    text: owArr[i]
+                    value: owArr[i].info,
+                    text: owArr[i].info
                 }));
+
+                if (owArr[i].logic != "") {
+                    hooker.append($('<option>').val(owArr[i].logic).text(owArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(owArr[i].logic).text(owArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             hooker.append($('<optgroup class="ml-2" label="Opportunity">'));
@@ -572,14 +635,19 @@ function loadModal(issueNo) {
 
             for (var i = 0; i < ooArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: ooArr[i],
-                    text: ooArr[i]
+                    value: ooArr[i].info,
+                    text: ooArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: ooArr[i],
-                    text: ooArr[i]
+                    value: ooArr[i].info,
+                    text: ooArr[i].info
                 }));
+
+                if (ooArr[i].logic != "") {
+                    hooker.append($('<option>').val(ooArr[i].logic).text(ooArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(ooArr[i].logic).text(ooArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             hooker.append($('<optgroup class="ml-2" label="Thread">'));
@@ -587,14 +655,19 @@ function loadModal(issueNo) {
 
             for (var i = 0; i < otArr.length; i++) {
                 hooker.append($('<option/>', {
-                    value: otArr[i],
-                    text: otArr[i]
+                    value: otArr[i].info,
+                    text: otArr[i].info
                 }));
 
                 watna.append($('<option/>', {
-                    value: otArr[i],
-                    text: otArr[i]
+                    value: otArr[i].info,
+                    text: otArr[i].info
                 }));
+
+                if (otArr[i].logic != "") {
+                    hooker.append($('<option>').val(otArr[i].logic).text(otArr[i].logic).addClass("logicDiv"));
+                    watna.append($('<option>').val(otArr[i].logic).text(otArr[i].logic).addClass("logicDiv"));
+                }
             }
 
             $("#loadingView").hide();

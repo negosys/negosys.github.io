@@ -53,12 +53,12 @@
         <div class="container-fluid">
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
               <div class="issueTitle"></div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
               <div class="float-sm-right">
-                <ul class="nav nav-tabs ml-auto p-2" >
+                <ul class="nav nav-tabs ml-auto p-2">
                   <li class="nav-item"><a id="btnPrevIssue" class="nav-link disabled iconDisableThemeColor" href="#"><i
                         class="fas fa-chevron-left iconThemeColor"></i></a></li>
                   <div class="totalIssue"></div>
@@ -69,46 +69,50 @@
             </div>
           </div>
 
-          <div class="row justify-content-center mt-3 mb-3">
-            <h5 class="btn-lg themeColor1">Argumentation</h5>
-          </div>
-          <div class="row">
-            <p>Please wait for NegoSys to generate the best negotiation offer strategies</p>
+          <div id="labelDiv" class="hiddenField">
+            <div class="row justify-content-center mt-3 mb-3">
+              <h5>Please wait for NegoSys to generate the best negotiation offer strategies</h5>
+            </div>
           </div>
 
-          <div class="tab-content">
-            <div class="row">
-              <!-- left column -->
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-header themeColor text-center">
-                    <h5>HOOKER</h5>
-                  </div>
-                  <div>Too Good To Lose Offer</div>
-                  <div class="card-body hookerContainer" style="height: 25em;">
+          <div id="argumentationDiv">
+            <div class="row justify-content-center mt-3 mb-3">
+              <h5 class="btn-lg themeColor1">Argumentation</h5>
+            </div>
+
+            <div class="tab-content">
+              <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header themeColor text-center">
+                      <h5>HOOKER</h5>
+                      <p>Too Good To Lose Offer</p>
+                    </div>
+                    <div class="card-body hookerContainer" style="height: 25em;">
+
+                    </div>
+
 
                   </div>
-                 
                 </div>
-              </div>
+                
+                <!-- right column -->
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header themeColor text-center">
+                      <h5>WATNA</h5>
+                      <p>Too Risky and Costly to Refuse my offer</p>
+                    </div>
+                    <div class="card-body watnaContainer" style="height: 25em;">
 
-              <!-- right column -->
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-header themeColor text-center">
-                    <h5>WATNA</h5>
-                  </div>
-                  <div>Too Risky and Costly to Refuse my offer</div>
-                  <div class="card-body watnaContainer" style="height: 25em;">
+                    </div>
 
                   </div>
-                 
                 </div>
               </div>
             </div>
           </div>
-
-
 
 
         </div>

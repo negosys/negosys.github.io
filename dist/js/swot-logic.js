@@ -10,6 +10,24 @@ var issueLists;
 var issueSnList = [];
 var isSave = false;
 
+var mysideStrengthP = "Develop Strategic Actions or write Argumentations to emphasize and magnify My positive strengths making TOS perceive My strengths as my crucial powers that TOS cannot deal with, so that TOS should accommodate Mt demand and/or proposal.";
+var mysideStrengthN = "Develop Strategic Actions or write Argumentations to dilute My negative weaknesses and, even, to transform My negative weaknesses into My situational strengths or powers so that TOS abandon to pressure or threaten me with my weakness.";
+var mysideWeaknessP = "Develop Strategic Actions or write Argumentations to emphasize and magnify MY positive weaknesses, transforming the weaknesses into the fatal and lethal weaknesses and/or threat of TOS so that TOS should accommodate My demand and/or proposal.";
+var mysideWeaknessN = "Develop Strategic Actions or write Argumentations to dilute and mitigate My negative weakness. Or, transform My negative weakness into TOS's situational and fatal weaknesses so that TOS should accommodate My demand and/or proposal.";
+var mysideOpportunityP = "Develop Strategic Actions or write Argumentations to emphasize and magnify My positive opportunity (Alternative or BATNA), and, even transform My BATNA into TOS's fatal threat and fear so that TOS should accommodate My proposal and demand to avoid the likely disastrous situations if I take My BATNA.";
+var mysideOpportunityN = "Develop Strategic Actions or write Argumentations to dilute and mitigate My negative opportunity. Or, transform My negative opportunity into TOS's situational and fatal weaknesses or threat so that TOS should accommodate My demand and/or proposal.";
+var mysideThreatP = "Develop Strategic Actions or write Argumentations to emphasize and magnify MY positive threats to pressure TOS to accommodate My demand and/or proposal to avoid the likely disaster caused by My positive threat if realized.";
+var mysideThreatN = "Develop Strategic Actions or write Argumentations to dilute My negative threats for assuring TOS to collaborate as best choice.";
+
+var othersideStrengthP = "Develop Strategic Actions or write Argumentations to emphasize and magnify TOS's positive strengths for synergic collaborating.";
+var othersideStrengthN = "Develop Strategic Actions or write Argumentations to dilute TOS's negative strengths and, even, to transform TOS's negative strengths into TOS's situational and fatal weaknesses so that TOS should accommodate My demand and/or proposal.";
+var othersideWeaknessP = "Develop Strategic Actions or write Argumentations to emphasize and magnify TOS's positive weaknesses, transforming the weaknesses into the fatal and lethal weaknesses of TOS so that TOS should accommodate My demand and/or proposal.";
+var othersideWeaknessN = "Develop Strategic Actions or write Argumentations to transform TOS's negative weakness into TOS's situational and fatal weaknesses so that TOS should accommodate My demand and/or proposal.";
+var othersideOpportunityP = "Develop Strategic Actions or write Argumentations to emphasize and magnify TOS's positive opportunities for synergic collaborating.";
+var othersideOpportunityN = "Develop Strategic Actions or write Argumentations to transform TOS's negative opportunity (Alternative or BATNA) into WATNA to make TOS abandon the negative BATNA that is harmful and/or fatal to me.";
+var othersideThreatP = "Develop Strategic Actions or write Argumentations to emphasize and magnify TOS's positive threats transforming TOS's threat into fatal and lethal disaster so that TOS should accommodate My demand and/or proposal to avoid the likely disaster.";
+var othersideThreatN = "Develop Strategic Actions or write Argumentations to dilute TOS's negative threats for assuring TOS to synergically collaborate.";
+
 $(document).ready(async function () {
     var ck = await user.getCookies("userRole");
     var sessionExp = false;
@@ -189,6 +207,11 @@ function loadMeSide(item) {
             $(id.concat("logic")).val(itemData.logic);
             console.log($(id.concat("logic")).val());
             $(id.concat("logic")).removeClass("hiddenField");
+            if (itemData.np == "P") {
+                $(id.concat("logic")).attr("placeholder", mysideStrengthP);
+            } else {
+                $(id.concat("logic")).attr("placeholder", mysideStrengthN);
+            }
         }
     });
 
@@ -201,6 +224,11 @@ function loadMeSide(item) {
             $(id.concat("prior")).html(itemData.priority);
             $(id.concat("logic")).val(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
+            if (itemData.np == "P") {
+                $(id.concat("logic")).attr("placeholder", mysideWeaknessP);
+            } else {
+                $(id.concat("logic")).attr("placeholder", mysideWeaknessN);
+            }
         }
 
     });
@@ -214,6 +242,11 @@ function loadMeSide(item) {
             $(id.concat("prior")).html(itemData.priority);
             $(id.concat("logic")).val(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
+            if (itemData.np == "P") {
+                $(id.concat("logic")).attr("placeholder", mysideOpportunityP);
+            } else {
+                $(id.concat("logic")).attr("placeholder", mysideOpportunityN);
+            }
         }
 
     });
@@ -227,6 +260,11 @@ function loadMeSide(item) {
             $(id.concat("prior")).html(itemData.priority);
             $(id.concat("logic")).val(itemData.logic);
             $(id.concat("logic")).removeClass("hiddenField");
+            if (itemData.np == "P") {
+                $(id.concat("logic")).attr("placeholder", mysideThreatP);
+            } else {
+                $(id.concat("logic")).attr("placeholder", mysideThreatN);
+            }
         }
 
     });
@@ -247,6 +285,11 @@ function loadOtherSide(item) {
         $(id.concat("prior")).html(itemData.priority);
         $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
+        if (itemData.np == "P") {
+            $(id.concat("logic")).attr("placeholder", othersideStrengthP);
+        } else {
+            $(id.concat("logic")).attr("placeholder", othersideStrengthN);
+        }
     });
 
     $.each(w, function (index, itemData) {
@@ -257,6 +300,11 @@ function loadOtherSide(item) {
         $(id.concat("prior")).html(itemData.priority);
         $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
+        if (itemData.np == "P") {
+            $(id.concat("logic")).attr("placeholder", othersideWeaknessP);
+        } else {
+            $(id.concat("logic")).attr("placeholder", othersideWeaknessN);
+        }
     });
 
     $.each(o, function (index, itemData) {
@@ -267,6 +315,11 @@ function loadOtherSide(item) {
         $(id.concat("prior")).html(itemData.priority);
         $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
+        if (itemData.np == "P") {
+            $(id.concat("logic")).attr("placeholder", othersideOpportunityP);
+        } else {
+            $(id.concat("logic")).attr("placeholder", othersideOpportunityN);
+        }
     });
 
     $.each(t, function (index, itemData) {
@@ -277,6 +330,11 @@ function loadOtherSide(item) {
         $(id.concat("prior")).html(itemData.priority);
         $(id.concat("logic")).val(itemData.logic);
         $(id.concat("logic")).removeClass("hiddenField");
+        if (itemData.np == "P") {
+            $(id.concat("logic")).attr("placeholder", othersideThreatP);
+        } else {
+            $(id.concat("logic")).attr("placeholder", othersideThreatN);
+        }
     });
 
 }

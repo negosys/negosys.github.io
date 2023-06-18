@@ -55728,5 +55728,30 @@ th {
   border-color: red;
 }
 
+.tooltip1 {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip1 .tooltiptext {
+  visibility: hidden;
+  width: 350px;
+  background-color: #E7E8FF;
+  color: black;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.5;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip1:hover .tooltiptext {
+  visibility: visible;
+}
+
 
 /*# sourceMappingURL=adminlte.css.map */

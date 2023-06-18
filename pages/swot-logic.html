@@ -24,6 +24,12 @@
     .tooltip-test {
       color: black;
     }
+
+    textarea::placeholder {
+      font-family: Arial;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
   </style>
 </head>
 
@@ -41,7 +47,12 @@
         <div class="container-fluid">
           <div class="row mb-2 mt-2">
             <div class="col-sm-6">
-              <h1>SWOT Logic</h1>
+              <h1 class="tooltip1">SWOT Logic <i class="fa fa-question-circle">
+                  <span class="tooltiptext">
+                    Positive features are applied either to collaborative or to emphasizing argumentations while
+                    negative
+                    features are applied either to diluting or mitigating argumentations.
+                  </span></i></h1>
             </div>
             <div class="col-sm-6">
               <div class="float-sm-right">
@@ -53,12 +64,12 @@
               </div>
             </div>
           </div>
-          <div class="row mb-2 mt-2 ml-1">
+          <!-- <div class="row mb-2 mt-2 ml-1">
             <p>
               Positive features are applied either to collaborative or to emphasizing argumentations while negative
               features are applied either to diluting or mitigating argumentations.
             </p>
-          </div>
+          </div> -->
         </div><!-- /.container-fluid -->
       </section>
 
